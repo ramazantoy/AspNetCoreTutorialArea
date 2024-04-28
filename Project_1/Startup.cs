@@ -28,6 +28,7 @@ namespace Project_1
             }
 
             app.UseRouting();
+            app.UseMiddleware<ResponseEditingMiddleware>();
             app.UseMiddleware<RequestEditingMiddleware>();
 
             //app.UseEndpoints(endpoints =>
