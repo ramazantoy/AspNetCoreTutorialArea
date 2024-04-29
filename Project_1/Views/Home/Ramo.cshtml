@@ -19,10 +19,27 @@
 </p>
 <hr />
 <p>
-    ViewDataName = @ViewData["Name"];
+    ViewDataName = @ViewData["Name"]
 </p>
 
 <hr />
 <p>
-    TempDataName = @TempData["Name"];
+    TempDataName = @TempData["Name"]
 </p>
+
+<br />
+<br />
+
+@model Project_1.Models.Customer
+
+<hr />
+<p>
+    ModelValues
+    <hr />
+    @Model.FirstName
+    <br />
+    <hr />
+    @Model.LastName
+</p>
+
+

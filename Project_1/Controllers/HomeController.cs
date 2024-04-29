@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Project_1.Models;
 
 namespace Project_1.Controllers
 {
@@ -19,8 +20,9 @@ namespace Project_1.Controllers
 
             TempData["Name"] = "RamoTemp";
 
-
-            return View();
+            Customer customer = new (){ FirstName="Leon",LastName="Brave"};
+          
+            return View(customer); //only class not string or other variables
         }
     }
 }
