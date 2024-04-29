@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Project_1.Controllers;
 using Project_1.Middlewares;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Project_1
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,8 +30,17 @@ namespace Project_1
             }
 
             app.UseRouting();
-            app.UseMiddleware<ResponseEditingMiddleware>();
-            app.UseMiddleware<RequestEditingMiddleware>();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "defauult",
+                    pattern: "{Controller}/{Action}",
+                    defaults: new { Controller = "Home", Action = "Index" }//for default page if controller is not found.
+                    );
+            });
+
+            //app.UseMiddleware<ResponseEditingMiddleware>();
+            //app.UseMiddleware<RequestEditingMiddleware>();
 
             //app.UseEndpoints(endpoints =>
             //{
