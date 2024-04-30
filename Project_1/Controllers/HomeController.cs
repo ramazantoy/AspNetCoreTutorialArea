@@ -16,6 +16,8 @@ namespace Project_1.Controllers
 
         public IActionResult Ramo()
         {
+
+            var values = RouteData.Values; // for handle all route values
             ViewBag.Name = "Ramo";
             ViewData["Name"] = "Ramo2"; //override  for ViewBag
 
