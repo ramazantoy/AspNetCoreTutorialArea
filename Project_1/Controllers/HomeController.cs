@@ -8,9 +8,8 @@ namespace Project_1.Controllers
     {
         public IActionResult Index()
         {
-            /// viewbag,viewdata,tempdata,model 
-            /// 
-         
+             //viewbag,viewdata,tempdata,model 
+
             return View();
           
         }
@@ -19,13 +18,13 @@ namespace Project_1.Controllers
         public IActionResult Ramo()
         {
 
-            var values = RouteData.Values; // for handle all route values
-            ViewBag.Name = "Ramo";
-            ViewData["Name"] = "Ramo2"; //override  for ViewBag
-
-            TempData["Name"] = "RamoTemp";
-
-            Customer customer = new (){ FirstName="Leon",LastName="Brave"};
+            // var values = RouteData.Values; // for handle all route values
+            // ViewBag.Name = "Ramo";
+            // ViewData["Name"] = "Ramo2"; //override  for ViewBag
+            //
+            // TempData["Name"] = "RamoTemp";
+            //
+            // Customer customer = new (){ FirstName="Leon",LastName="Brave"};
 
             // return View("Index",customer) for open other views and with customer.
             // return RedirectToAction("Index", customer); not open directly calls  Index func. first
@@ -36,7 +35,10 @@ namespace Project_1.Controllers
 
             //return RedirectToAction("Index", "Product", new {@id=5}); with parameter
 
-            return View(customer); //only class not string or other variables
+            // return View(customer); //only class not string or other variables
+            
+          var customers=  CustomerContext.Customers;
+          return View(customers);
         }
     }
 }
