@@ -32,9 +32,16 @@ namespace Project_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                
+                
+                // endpoints.MapControllerRoute( //for using other controllers
+                //     name: "test",
+                //     pattern: "Test/{Action}/",
+                //     defaults: new { Controller = "Home", Action = "Index" }
+                // );
                 endpoints.MapControllerRoute(
-                    name: "defauult",
-                    pattern: "{Controller}/{Action}",
+                    name: "default",
+                    pattern: "{Controller}/{Action}/{id?}",//nullabla id or id:int  only int or id:alpha only characters
                     defaults: new { Controller = "Home", Action = "Index" }//for default page if controller is not found.
                     );
             });
