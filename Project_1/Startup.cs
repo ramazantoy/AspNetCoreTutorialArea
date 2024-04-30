@@ -30,6 +30,9 @@ namespace Project_1
             }
 
             app.UseRouting();
+
+            app.UseStaticFiles();//wwwroot opened
+            
             app.UseEndpoints(endpoints =>
             {
                 

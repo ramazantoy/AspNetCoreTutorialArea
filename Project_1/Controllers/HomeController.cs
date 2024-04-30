@@ -40,5 +40,11 @@ namespace Project_1.Controllers
           var customers=  CustomerContext.Customers;
           return View(customers);
         }
+
+        public IActionResult CustomerTest()
+        {
+            var customers=  CustomerContext.Customers;
+            return View(customers);
+        }
     }
 }

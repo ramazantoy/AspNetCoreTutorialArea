@@ -1,46 +1,29 @@
-﻿@* @{ *@
-@*     int Calculate(int vrb1, int vrb2) *@
-@*     { *@
-@*         return vrb1 + vrb2; *@
-@*     } *@
-@* } *@
-
+﻿@{ 
+    int Calculate(int vrb1, int vrb2) 
+    { 
+        return vrb1 + vrb2;
+    } 
+ } 
 <p>
     Hi, this is ramo page.
 </p>
 
-@* <p> *@
-@*     Resutlt=@Calculate(3,5); *@
-@* </p> *@
-@* *@
-@* <p> *@
-@*     ViewBagName = @ViewBag.Name *@
-@* </p> *@
-@* <hr /> *@
-@* <p> *@
-@*     ViewDataName = @ViewData["Name"] *@
-@* </p> *@
-@* *@
-@* <hr /> *@
-@* <p> *@
-@*     TempDataName = @TempData["Name"] *@
-@* </p> *@
-@* *@
-@* <br /> *@
-@* <br /> *@
+<p>
+    Resutlt=@Calculate(3,5);
+</p>
 
-@model List<Project_1.Models.Customer>
-
-<table>
-    <tr>
-        <th>FirstName</th>
-        <th>LastName</th>
-    </tr>
-    @foreach (var customer in Model)
-    {
-        <tr>
-            <td>@customer.FirstName</td>
-            <td>@customer.LastName</td>
-        </tr>
-    }
-</table>
+@*
+<p>
+    ViewBagName = @ViewBag.Name
+</p>
+<hr />
+<p>
+    ViewDataName = @ViewData["Name"]
+</p>
+<hr />
+<p>
+    TempDataName = @TempData["Name"]
+</p>
+*@
+<br />
+<br />
