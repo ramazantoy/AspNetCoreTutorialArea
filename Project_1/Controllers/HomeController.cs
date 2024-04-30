@@ -3,6 +3,7 @@ using Project_1.Models;
 
 namespace Project_1.Controllers
 {
+    // [Route("[Controller]/[action]")] //removed start up settings
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -14,6 +15,7 @@ namespace Project_1.Controllers
           
         }
 
+        // [Route("Ramo")] //override from startup and its can add for controller
         public IActionResult Ramo()
         {
 
