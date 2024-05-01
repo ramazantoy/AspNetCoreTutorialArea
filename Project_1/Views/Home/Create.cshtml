@@ -1,0 +1,25 @@
+﻿<html lang="en">
+<head>
+    <title>Create Customer</title>
+    <link href="~/style.css" rel="stylesheet"/>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <div class="table-bordered">
+        <h3>Create Customer</h3>
+        <form action="/Home/CreateWithForm" method="post">
+            <div class="form-group">
+                <label>Customer Name:</label>
+                <input type="text" name="Name" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Customer Last Name:</label>
+                <input type="text" name="lastName" class="form-control">
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</head>
+<body></body>
+</html>

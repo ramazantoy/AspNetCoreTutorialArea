@@ -51,5 +51,17 @@ namespace Project_1.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateWithForm()
+        {
+            return RedirectToAction("Create");
+        }
+        
     }
 }

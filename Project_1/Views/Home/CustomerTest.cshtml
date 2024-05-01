@@ -3,27 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="tr">
 <head>
     <title>Customer Test</title>
-    <link href="~/style.css" rel="stylesheet" />
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/style.css" rel="stylesheet"/>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
-<table class="table table-hover table-bordered">
-    <thead>
-    <tr>
-        <th>FirstName</th>
-        <th>LastName</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var customer in Model)
-    {
+<div class="container">
+    <h3>Customer List</h3>
+    <a href="Home/Create">Create</a>
+    <table class="table table-hover table-bordered">
+        <thead>
         <tr>
-            <td>@customer.FirstName</td>
-            <td>@customer.LastName</td>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th></th>
         </tr>
-    }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>
+                    <a href="Home/Update/@customer.Id">Update</a>
+                    <a href="Home/Remove/@customer.Id">Remove</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

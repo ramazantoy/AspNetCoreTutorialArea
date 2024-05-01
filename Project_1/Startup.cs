@@ -52,9 +52,9 @@ namespace Project_1
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{Controller}/{Action}/{id?}",//nullabla id or id:int  only int or id:alpha only characters
-                    defaults: new { Controller = "Home", Action = "Index" }//for default page if controller is not found.
+                    defaults: new { Controller = "Home", Action = "CustomerTest" }//for default page if controller is not found.
                 );
-                endpoints.MapFallbackToController("HandleUnknownRoutes", "Home");
+                // endpoints.MapFallbackToController("HandleUnknownRoutes", "Home");
             });
 
             //app.UseMiddleware<ResponseEditingMiddleware>();
