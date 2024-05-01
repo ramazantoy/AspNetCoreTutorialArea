@@ -7,8 +7,9 @@ using Project_1.Controllers;
 using Project_1.Middlewares;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.FileProviders;
 
 namespace Project_1
 {
@@ -32,6 +33,12 @@ namespace Project_1
             app.UseRouting();
 
             app.UseStaticFiles();//wwwroot opened
+          
+            app.UseStaticFiles(new StaticFileOptions
+           {
+               RequestPath = "/node_modules",
+               FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"node_modules"))
+           });
             
             app.UseEndpoints(endpoints =>
             {
@@ -46,7 +53,8 @@ namespace Project_1
                     name: "default",
                     pattern: "{Controller}/{Action}/{id?}",//nullabla id or id:int  only int or id:alpha only characters
                     defaults: new { Controller = "Home", Action = "Index" }//for default page if controller is not found.
-                    );
+                );
+                endpoints.MapFallbackToController("HandleUnknownRoutes", "Home");
             });
 
             //app.UseMiddleware<ResponseEditingMiddleware>();

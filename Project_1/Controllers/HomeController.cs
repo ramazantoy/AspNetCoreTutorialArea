@@ -46,5 +46,10 @@ namespace Project_1.Controllers
             var customers=  CustomerContext.Customers;
             return View(customers);
         }
+        
+        public IActionResult HandleUnknownRoutes()
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -1,0 +1,8 @@
+﻿{
+  "name": "Project_1",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "4.5.3",
+    "jquery": "3.5.1"
+  }
+}
