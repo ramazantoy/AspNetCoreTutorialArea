@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Project_1.Models;
 
@@ -63,14 +64,14 @@ namespace Project_1.Controllers
             var lastName = HttpContext.Request.Form["lastName"].ToString();
 
             Customer lastCustomer = null;
-        
+
             if (CustomerContext.Customers.Count > 0)
-            { 
+            {
                 lastCustomer = CustomerContext.Customers.Last();
             }
-            
+
             var id = 1;
-            
+
             if (lastCustomer != null)
             {
                 id = lastCustomer.Id + 1;
@@ -91,11 +92,28 @@ namespace Project_1.Controllers
             return RedirectToAction("CustomerTest");
         }
 
+
         [HttpGet]
         public IActionResult Update()
         {
             var customerId = int.Parse(RouteData.Values["id"].ToString());
+            var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id == customerId);
+            return View(updateCustomer);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCustomer()
+        {
+            var customerId = Int32.Parse(HttpContext.Request.Form["id"].ToString());
+            var name = HttpContext.Request.Form["firstName"].ToString();
+            var lastName = HttpContext.Request.Form["lastName"].ToString();
+            var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id == customerId);
+
+            updateCustomer.FirstName = name;
+            updateCustomer.LastName = lastName;
+            
             return RedirectToAction("CustomerTest");
         }
+      
     }
 }
