@@ -1,11 +1,12 @@
-﻿<html lang="en">
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<html lang="en">
 <head>
     <title>Create Customer</title>
     <link href="~/style.css" rel="stylesheet"/>
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <div class="table-bordered">
         <h3>Create Customer</h3>
-        <form action="/Home/CreateWithForm" method="post">
+        <form asp-action="CreateWithForm" asp-controller="Home" method="post">
             <div class="form-group">
                 <label>Customer Name:</label>
                 <input type="text" name="firstName" class="form-control">
