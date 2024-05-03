@@ -1,16 +1,17 @@
 ﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @using Project_1.Models
 @model List<Customer>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="tr">
 <head>
     <title>Customer Test</title>
-    <link href="~/style.css" rel="stylesheet"/>
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    @* <link href="~/style.css" rel="stylesheet"/> *@
 </head>
-<body>
-<div class="container">
-    <h3>Customer List</h3>
+
+<h3>Customer List</h3>
     <a asp-action="Create" asp-controller="Home">Create</a>
     <table class="table table-hover table-bordered">
         <thead>
@@ -34,6 +35,3 @@
         }
         </tbody>
     </table>
-</div>
-</body>
-</html>
