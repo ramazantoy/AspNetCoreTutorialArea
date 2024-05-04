@@ -40,80 +40,14 @@ namespace Project_1.Controllers
             var customers = CustomerContext.Customers;
             return View(customers);
         }
-
-        public IActionResult CustomerTest()
-        {
-            var customers = CustomerContext.Customers;
-            return View(customers);
-        }
+        
 
         public IActionResult HandleUnknownRoutes()
         {
             return RedirectToAction("Index", "Home");
         }
+        
 
-        public IActionResult Create()
-        {
-            return View(new Customer());
-        }
-
-        [HttpPost]
-        public IActionResult Create(Customer customer)
-        {
-            // var name = HttpContext.Request.Form["firstName"].ToString();
-            // var lastName = HttpContext.Request.Form["lastName"].ToString();
-            //
-            // Customer lastCustomer = null;
-            customer.Id = 1;
-            if (CustomerContext.Customers.Count > 0)
-            {
-                // lastCustomer = CustomerContext.Customers.Last();
-                customer.Id = CustomerContext.Customers.Last().Id+1;
-            }
-            // CustomerContext.Customers.Add(new Customer { Id = id, FirstName = name, LastName = lastName });
-            CustomerContext.Customers.Add(customer);
-            return RedirectToAction("CustomerTest");
-        }
-
-        [HttpGet]
-        public IActionResult Remove(int id)
-        {
-            // var routeData = int.Parse(RouteData.Values["id"].ToString()); //look for endpoint data
-
-            // var removedCustomer = CustomerContext.Customers.Find(customer => customer.Id == routeData);
-            var removedCustomer = CustomerContext.Customers.Find(customer => customer.Id == id);
-
-            CustomerContext.Customers.Remove(removedCustomer);
-            return RedirectToAction("CustomerTest");
-        }
-
-
-        [HttpGet]
-        public IActionResult Update(int id)
-        {
-            // var customerId = int.Parse(RouteData.Values["id"].ToString());
-            // var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id == customerId);
-            var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id ==id);
-            return View(updateCustomer);
-        }
-
-        [HttpPost]
-        public IActionResult Update(Customer updatedCustomer)
-        {
-            // var customerId = Int32.Parse(HttpContext.Request.Form["id"].ToString());
-            // var name = HttpContext.Request.Form["firstName"].ToString();
-            // var lastName = HttpContext.Request.Form["lastName"].ToString();
-            // var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id == customerId);
-            var updateCustomer = CustomerContext.Customers.FirstOrDefault(customer => customer.Id == updatedCustomer.Id);
-            
-            // updateCustomer.FirstName = name;
-            // updateCustomer.LastName = lastName;
-            
-            updateCustomer.FirstName = updatedCustomer.FirstName;
-            updateCustomer.LastName = updatedCustomer.LastName;
-            
-            return RedirectToAction("CustomerTest");
-        }
       
     }
 }

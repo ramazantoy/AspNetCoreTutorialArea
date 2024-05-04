@@ -10,7 +10,7 @@
 </head>
 
 <h3>Customer List</h3>
-    <a asp-action="Create" asp-controller="Home">Create</a>
+    <a asp-action="Create" asp-controller="Customer">Create</a>
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
@@ -26,8 +26,8 @@
                 <td>@customer.FirstName</td>
                 <td>@customer.LastName</td>
                 <td>
-                    <a asp-action="Update" asp-controller="Home" asp-route-id="@customer.Id">Update</a>
-                    <a asp-action="Remove" asp-controller="Home" asp-route-id="@customer.Id">Remove</a>
+                    <a asp-action="Update" asp-controller="Customer" asp-route-id="@customer.Id">Update</a>
+                    <a asp-action="Remove" asp-controller="Customer" asp-route-id="@customer.Id">Remove</a>
                 </td>
             </tr>
         }
