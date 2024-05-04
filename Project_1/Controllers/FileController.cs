@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Project_1.Controllers
@@ -42,6 +43,29 @@ namespace Project_1.Controllers
            writer.Write("Hi, its ramo");
            writer.Close();
             return RedirectToAction("List");
+        }
+
+        public IActionResult Upload()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult Upload(IFormFile formFile)
+        {
+            if (formFile.ContentType == "image/png")
+            {
+                var ext= Path.GetExtension(formFile.FileName);
+                var stream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images",Guid.NewGuid()+ext), FileMode.Create);
+                formFile.CopyTo(stream);
+                TempData["message"] = "File uploaded successfully.";
+            }
+            else
+            {
+                TempData["message"] = "Fail to upload file. Unsuitable file type ";
+            }
+
+            return View();
         }
     }
     
