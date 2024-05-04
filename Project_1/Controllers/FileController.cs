@@ -14,11 +14,7 @@ namespace Project_1.Controllers
             var files = info.GetFiles();
             return View(files);
         }
-
-        public IActionResult Remove()
-        {
-            return RedirectToAction("List");
-        }
+        
 
         public IActionResult Create()
         {
@@ -31,6 +27,16 @@ namespace Project_1.Controllers
             if (!fileInfo.Exists)
             {
                 fileInfo.Create();
+            }
+            return RedirectToAction("List");
+        }
+
+        public IActionResult Remove(string fileName)
+        {
+            var fileInfo = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files",fileName));
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
             }
             return RedirectToAction("List");
         }
