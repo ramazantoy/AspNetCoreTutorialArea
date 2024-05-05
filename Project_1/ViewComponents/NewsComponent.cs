@@ -5,10 +5,15 @@ namespace Project_1.ViewComponents
 {
     public class NewsComponent : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string color="Default")
         {
             var news = NewsContext.News;
-            return View(news);
+            return color switch
+            {
+                "Default" => View(news),
+                "Red" => View("Red", news),
+                _ => View("Blue", news)
+            };
         }
     }
 }

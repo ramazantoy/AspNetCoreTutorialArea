@@ -1,0 +1,11 @@
+﻿<p>View Components Works</p>
+
+
+<ul class="list-group">
+    
+    @foreach (var news in Model)
+    {
+        <li class="list-group-item text-danger" aria-disabled="true">@news.Title</li>
+    }
+
+</ul>
