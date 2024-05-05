@@ -25,6 +25,18 @@ namespace Project_1.Controllers
             // var lastName = HttpContext.Request.Form["lastName"].ToString();
             //
             // Customer lastCustomer = null;
+
+            // var check = ModelState.IsValid;//for correct check
+            // var errors = ModelState.Values.SelectMany(I => I.Errors.Select(modelError=>modelError.ErrorMessage));
+
+            // if (customer.FirstName == "Leon")
+            // {
+            //     ModelState.AddModelError("","first name is cant be leon");
+            // }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             customer.Id = 1;
             if (CustomerContext.Customers.Count > 0)
             {
@@ -34,6 +46,7 @@ namespace Project_1.Controllers
             // CustomerContext.Customers.Add(new Customer { Id = id, FirstName = name, LastName = lastName });
             CustomerContext.Customers.Add(customer);
             return RedirectToAction("List");
+         
         }
         
         
