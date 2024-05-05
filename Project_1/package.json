@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "dependencies": {
     "bootstrap": "4.5.3",
-    "jquery": "3.5.1"
+    "jquery": "3.5.1",
+    "jquery-validation": "1.19.2",
+    "@abp/jquery-validation-unobtrusive": "3.2.1"
   }
 }
