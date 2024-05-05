@@ -33,6 +33,8 @@ namespace Project_1.Controllers
             // {
             //     ModelState.AddModelError("","first name is cant be leon");
             // }
+
+            ModelState.Remove("Id");
             if (!ModelState.IsValid)
             {
                 return View();

@@ -6,6 +6,8 @@ namespace Project_1.Models
     
     public class Customer
     {
+        [Required(ErrorMessage = "Id is required")] // maybe CreateCustomer class writing for required jobs nexttime
+        [Range(1,int.MaxValue)]
         public  int Id { get; set; }
         
         [Required(ErrorMessage = "The name is required.")]
