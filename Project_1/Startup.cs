@@ -49,6 +49,11 @@ namespace Project_1
                 //     pattern: "Test/{Action}/",
                 //     defaults: new { Controller = "Home", Action = "Index" }
                 // );
+
+                endpoints.MapControllerRoute(
+                    name: "Areas",
+                    pattern: "{Area}/{Controller=Home}/{Action=Index}/{id?}"
+                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{Controller}/{Action}/{id?}",//nullabla id or id:int  only int or id:alpha only characters
