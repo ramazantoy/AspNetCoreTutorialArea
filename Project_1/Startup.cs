@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 
 namespace Project_1
@@ -24,13 +25,14 @@ namespace Project_1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*,IConfiguration configuration*/)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            // var firstName = configuration.GetSection("FirstName"); //Configuration test
             app.UseExceptionHandler("/Home/Error");
             
             app.UseStatusCodePagesWithReExecute("/Home/Status", "?code={0}");
