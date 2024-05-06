@@ -46,6 +46,11 @@ namespace Project_1.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Status(int? code)
+        {
+            return View();
+        }
         
 
       

@@ -30,19 +30,21 @@ namespace Project_1
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseStaticFiles();//wwwroot opened
+          
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = "/node_modules",
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"node_modules"))
+            });
 
+            app.UseStatusCodePagesWithReExecute("/Home/Status", "?code={0}");
             app.UseRouting();
 
             app.UseSession();//for using session
 
-            app.UseStaticFiles();//wwwroot opened
-          
-            app.UseStaticFiles(new StaticFileOptions
-           {
-               RequestPath = "/node_modules",
-               FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"node_modules"))
-           });
-            
+           
             app.UseEndpoints(endpoints =>
             {
                 
