@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Project_1.Filters;
 using Project_1.Models;
 
 namespace Project_1.Controllers
@@ -19,6 +20,7 @@ namespace Project_1.Controllers
         }
         
         [HttpPost]
+        [ValidFirstName]
         public IActionResult Create(Customer customer)
         {
             // var name = HttpContext.Request.Form["firstName"].ToString();
