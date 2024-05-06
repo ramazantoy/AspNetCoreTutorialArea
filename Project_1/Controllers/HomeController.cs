@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Project_1.Models;
 
@@ -50,6 +51,17 @@ namespace Project_1.Controllers
         public IActionResult Status(int? code)
         {
             return View();
+        }
+        
+        public IActionResult Error()
+        {
+           var exceptionHandlerFeature= HttpContext.Features.Get<IExceptionHandlerFeature>();
+            return View();
+        }
+
+        public IActionResult ErrorTest()
+        {
+            throw new SystemException("Error Test");
         }
         
 
