@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +43,7 @@ namespace Project_1.Controllers
             var customers = CustomerContext.Customers;
             return View(customers);
         }
-        
+
 
         public IActionResult HandleUnknownRoutes()
         {
@@ -52,10 +54,35 @@ namespace Project_1.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Error()
         {
-           var exceptionHandlerFeature= HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var exceptionHandlerFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            // serilog nlog
+
+            var logFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "logs");
+
+            var logFileName = DateTime.Now.ToString();
+            logFileName = logFileName.Replace(" ", "_");
+            logFileName = logFileName.Replace("/", "-");
+            logFileName = logFileName.Replace(":", "-");
+            logFileName += ".txt";
+
+            var logFilePath = Path.Combine(logFolderPath, logFileName);
+            
+            var directoryInfo = new DirectoryInfo(logFolderPath);
+
+            if (!directoryInfo.Exists)
+            {
+                directoryInfo.Create();
+            }
+
+            var logFileInfo = new FileInfo(logFilePath);
+            var writer = logFileInfo.CreateText();
+            writer.WriteLine($"Where :{exceptionHandlerFeature.Path}");
+            writer.WriteLine($"Message :{exceptionHandlerFeature.Error}");
+            writer.Close();
             return View();
         }
 
@@ -63,8 +90,5 @@ namespace Project_1.Controllers
         {
             throw new SystemException("Error Test");
         }
-        
-
-      
     }
 }
