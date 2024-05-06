@@ -20,3 +20,7 @@ This project aims to help me learn MVC (Model-View-Controller) framework in .NET
 ## Dummy Video
 
 
+
+
+https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/63d3848d-2a65-4dc5-9d4e-6457c90f2bd5
+
