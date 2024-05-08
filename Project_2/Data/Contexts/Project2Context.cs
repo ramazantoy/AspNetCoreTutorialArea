@@ -7,6 +7,7 @@ namespace Project_2.Data.Contexts
     {
         public DbSet<Product> Products { get; set; } //default of table name
 
+        public DbSet<Category> Categories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
