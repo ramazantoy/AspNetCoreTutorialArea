@@ -13,5 +13,11 @@ namespace Project_2.Data.Contexts
             optionsBuilder.UseSqlServer(
                 "server=(localdb)\\mssqllocaldb; database=Project2Core; integrated security=true;");
         }
+
+        // protected override void OnModelCreating(ModelBuilder modelBuilder) //fluent api ovverride to dataannotations
+        // {
+        //     modelBuilder.Entity<Category>().ToTable(name: "Categories", schema: "dbo");
+        //     base.OnModelCreating(modelBuilder);
+        // }
     }
 }
