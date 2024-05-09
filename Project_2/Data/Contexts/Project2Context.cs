@@ -34,7 +34,7 @@ namespace Project_2.Data.Contexts
             modelBuilder.Entity<Product>().ToTable(name: "product");
             modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("product_name").HasMaxLength(50).HasMaxLength(50).IsRequired();
             modelBuilder.Entity<Product>().Property(x => x.Name).HasDefaultValueSql("'Product name is null'");
-
+            // modelBuilder.Entity<Product>().HasIndex(x => x.Name).IsUnique(true); // for adding unique value
             modelBuilder.Entity<Product>().Property(x => x.CreatedTime).HasColumnName("created_time");
             modelBuilder.Entity<Product>().Property(x => x.CreatedTime).HasDefaultValueSql("getdate()");//for default date time
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id").IsRequired();
