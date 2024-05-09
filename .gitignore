@@ -74,3 +74,6 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 /Project_1/node_modules
+/Project_2/node_modules
+/Project_2/Migrations
+/Project_2/.vs/
