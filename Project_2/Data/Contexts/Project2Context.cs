@@ -16,6 +16,11 @@ namespace Project_2.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) //fluent api ovverride to dataannotations
         {
+            // modelBuilder.Entity<Category>().HasNoKey(); //if we want create without primarykey
+            // modelBuilder.Entity<Category>().HasKey(x=>x.Name); // for set primary key one
+            // modelBuilder.Entity<Category>().HasKey(x => new { x.Name, x.Id });//name and id set to primary key
+            
+            
             modelBuilder.Entity<Category>().ToTable(name: "category");
             modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("category_name").HasMaxLength(50).IsRequired();
             modelBuilder.Entity<Category>().Property(x => x.Id).HasColumnName("category_id").IsRequired();
@@ -25,6 +30,10 @@ namespace Project_2.Data.Contexts
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id").IsRequired();
             modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price").HasMaxLength(50)
                 .IsRequired();
+            
+            
+            modelBuilder.Entity<Customer>().HasKey(x => new { x.Name, x.Id });
+            
             base.OnModelCreating(modelBuilder);
         }
     }
