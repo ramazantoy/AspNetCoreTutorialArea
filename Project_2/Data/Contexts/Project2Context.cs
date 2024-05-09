@@ -17,6 +17,12 @@ namespace Project_2.Data.Contexts
         public DbSet<ProductDetail> ProductDetails { get; set; }
         
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        
+        public DbSet<Employee> Employees { get; set; }
+        
+        public DbSet<PartTimeEmployee> PartTimeEmployees { get; set; }
+        
+        public DbSet<FullTimeEmployee> FullTimeEmployees { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -84,7 +90,14 @@ namespace Project_2.Data.Contexts
             modelBuilder.Entity<Category>().HasMany(x => x.ProductCategories).WithOne(x => x.Category)
                 .HasForeignKey(x => x.CategoryId);
             modelBuilder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
-            
+
+
+            modelBuilder.Entity<Employee>().ToTable("employees").Property(x => x.Id).HasColumnName("employee_id");
+            modelBuilder.Entity<Employee>().Property(x => x.FirstName).HasColumnName("employee_firstName");
+            modelBuilder.Entity<Employee>().Property(x => x.LastName).HasColumnName("employee_lastName");
+
+            modelBuilder.Entity<FullTimeEmployee>().ToTable("fullTime_employees").Property(x=>x.DailyWage).HasColumnName("daily_wage");
+            modelBuilder.Entity<PartTimeEmployee>().ToTable("partTime_employees").Property(x=>x.HourlyWage).HasColumnName("hourly_wage");
             base.OnModelCreating(modelBuilder);
         }
     }
