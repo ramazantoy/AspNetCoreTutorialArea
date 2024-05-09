@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Project_2.Data.Entities
 {
@@ -9,5 +10,7 @@ namespace Project_2.Data.Entities
         public decimal  Price { get; set; }
 
         public DateTime CreatedTime { get; set; }
+
+        public List<SaleHistory> SaleHistories { get; set; }
     }
 }

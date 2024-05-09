@@ -10,6 +10,8 @@ namespace Project_2.Data.Contexts
         public DbSet<Category> Categories { get; set; }
         
         public DbSet<Customer> Customers { get; set; }
+        
+        public DbSet<SaleHistory> SaleHistories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -26,6 +28,7 @@ namespace Project_2.Data.Contexts
             modelBuilder.Entity<Customer>().Property(x => x.Name).HasColumnName("customer_name").HasMaxLength(50).IsRequired();
             modelBuilder.Entity<Customer>().Property(x => x.Surname).HasColumnName("customer_surname").HasMaxLength(50).IsRequired();
             modelBuilder.Entity<Customer>().Property(x => x.Id).HasColumnName("customer_id");
+            modelBuilder.Entity<Customer>().HasKey(x => new { x.Name, x.Id }); //name and id setting to primary key
             
             modelBuilder.Entity<Category>().ToTable(name: "category");
             modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("category_name").HasMaxLength(50).IsRequired();
@@ -38,11 +41,22 @@ namespace Project_2.Data.Contexts
             modelBuilder.Entity<Product>().Property(x => x.CreatedTime).HasColumnName("created_time");
             modelBuilder.Entity<Product>().Property(x => x.CreatedTime).HasDefaultValueSql("getdate()");//for default date time
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id").IsRequired();
-            modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price").HasMaxLength(50)
-                .IsRequired();
+            modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price").HasMaxLength(50).IsRequired();
+
+            modelBuilder.Entity<SaleHistory>().ToTable("sale_history");
+            modelBuilder.Entity<SaleHistory>().Property(x => x.Id).HasColumnName("history_id").IsRequired().HasDefaultValueSql("-1");
+            modelBuilder.Entity<SaleHistory>().Property(x => x.ProductId).HasColumnName("product_id").IsRequired().HasDefaultValueSql("-1");
+            modelBuilder.Entity<SaleHistory>().Property(x => x.Amount).HasColumnName("sold_amount").HasDefaultValueSql("0");
+
+
             
+            // one to many with fluent api
             
-            modelBuilder.Entity<Customer>().HasKey(x => new { x.Name, x.Id });
+            // modelBuilder.Entity<Product>().HasMany(x => x.SaleHistories).WithOne(x => x.Product)
+            //     .HasForeignKey(x => x.ProductId);
+
+            modelBuilder.Entity<SaleHistory>().HasOne(x => x.Product).WithMany(x => x.SaleHistories)
+                .HasForeignKey(x => x.ProductId);
             
             base.OnModelCreating(modelBuilder);
         }
