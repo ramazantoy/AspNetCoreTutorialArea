@@ -10,7 +10,7 @@ namespace Project_2.Controllers
     {
        public IActionResult Index()
        {
-           // Project2Context context = new();
+           Project2Context context = new();
         // var entityEntry=   context.Products.Add(new Product //add database
         //    {
         //     Name = "Phone",
@@ -34,6 +34,11 @@ namespace Project_2.Controllers
 
        // var deletedProduct = context.Products.FirstOrDefault(x => x.Id == 1002); //delete data
        // context.Products.Remove(deletedProduct);
+
+       // var product = new Product { Price =4500 }; //for testing default value
+       // context.Products.Add(product);
+       // context.SaveChanges();
+       
        
        
            return View();

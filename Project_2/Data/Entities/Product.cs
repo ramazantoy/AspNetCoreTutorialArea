@@ -1,9 +1,13 @@
-﻿namespace Project_2.Data.Entities
+﻿using System;
+
+namespace Project_2.Data.Entities
 {
     public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal  Price { get; set; }
+
+        public DateTime CreatedTime { get; set; }
     }
 }
