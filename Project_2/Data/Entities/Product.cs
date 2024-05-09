@@ -14,5 +14,7 @@ namespace Project_2.Data.Entities
         public List<SaleHistory> SaleHistories { get; set; }
 
         public ProductDetail ProductDetail { get; set; }
+        
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }

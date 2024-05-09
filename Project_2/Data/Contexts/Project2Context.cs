@@ -15,6 +15,8 @@ namespace Project_2.Data.Contexts
         public DbSet<SaleHistory> SaleHistories { get; set; }
         
         public DbSet<ProductDetail> ProductDetails { get; set; }
+        
+        public DbSet<ProductCategory> ProductCategories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -69,6 +71,20 @@ namespace Project_2.Data.Contexts
                 .HasColumnName("product_id").IsRequired().HasMaxLength(50);
             modelBuilder.Entity<ProductDetail>().Property(x => x.Id).HasColumnName("detail_id").IsRequired();
             modelBuilder.Entity<ProductDetail>().Property(x => x.Description).HasColumnName("description");
+
+
+            modelBuilder.Entity<ProductCategory>().ToTable("product_category").Property(x => x.ProductId)
+                .HasColumnName("product_id").IsRequired();
+            
+            modelBuilder.Entity<ProductCategory>().Property(x=>x.CategoryId).HasColumnName("category_id").IsRequired();
+
+            modelBuilder.Entity<Product>().HasMany(x => x.ProductCategories).WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId); //many to many 
+            
+            modelBuilder.Entity<Category>().HasMany(x => x.ProductCategories).WithOne(x => x.Category)
+                .HasForeignKey(x => x.CategoryId);
+            modelBuilder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
+            
             base.OnModelCreating(modelBuilder);
         }
     }

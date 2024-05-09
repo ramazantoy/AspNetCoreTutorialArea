@@ -1,6 +1,8 @@
 ﻿// using System.ComponentModel.DataAnnotations;
 // using System.ComponentModel.DataAnnotations.Schema;
 
+using System.Collections.Generic;
+
 namespace Project_2.Data.Entities
 {
     // [Table(name:"Category",Schema = "c")] // for table name and shema write add-migrate ... and update-database
@@ -14,5 +16,7 @@ namespace Project_2.Data.Entities
         //for category_name  and max length
         // [Column("category_name",TypeName = "nvarchar(50)")]
         public string Name { get; set; }
+        
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }
