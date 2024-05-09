@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO.Compression;
+using Microsoft.EntityFrameworkCore;
 using Project_2.Data.Entities;
 
 namespace Project_2.Data.Contexts
@@ -12,6 +13,8 @@ namespace Project_2.Data.Contexts
         public DbSet<Customer> Customers { get; set; }
         
         public DbSet<SaleHistory> SaleHistories { get; set; }
+        
+        public DbSet<ProductDetail> ProductDetails { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -54,10 +57,18 @@ namespace Project_2.Data.Contexts
             
             // modelBuilder.Entity<Product>().HasMany(x => x.SaleHistories).WithOne(x => x.Product)
             //     .HasForeignKey(x => x.ProductId);
+            
 
             modelBuilder.Entity<SaleHistory>().HasOne(x => x.Product).WithMany(x => x.SaleHistories)
-                .HasForeignKey(x => x.ProductId);
+                .HasForeignKey(x => x.ProductId);//one to many
+
+            modelBuilder.Entity<Product>().HasOne(x => x.ProductDetail).WithOne(x => x.Product)
+                .HasForeignKey<ProductDetail>(x => x.ProductId);//one to one
             
+            modelBuilder.Entity<ProductDetail>().ToTable("product_detail").Property(x => x.ProductId)
+                .HasColumnName("product_id").IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<ProductDetail>().Property(x => x.Id).HasColumnName("detail_id").IsRequired();
+            modelBuilder.Entity<ProductDetail>().Property(x => x.Description).HasColumnName("description");
             base.OnModelCreating(modelBuilder);
         }
     }

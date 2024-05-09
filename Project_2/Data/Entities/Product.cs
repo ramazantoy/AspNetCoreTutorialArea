@@ -12,5 +12,7 @@ namespace Project_2.Data.Entities
         public DateTime CreatedTime { get; set; }
 
         public List<SaleHistory> SaleHistories { get; set; }
+
+        public ProductDetail ProductDetail { get; set; }
     }
 }
