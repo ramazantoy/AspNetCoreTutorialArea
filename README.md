@@ -26,8 +26,6 @@ https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/63d3848d-2a
 
 # Project_2: Learning Entity Framework Core
 
-## Description
-
 This project is dedicated to learning Entity Framework Core and its various features in .NET. It covers a wide range of topics including database creation, entity configuration, relationships, inheritance strategies, and dependency injection.
 
 ## Topics Covered
