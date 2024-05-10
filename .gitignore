@@ -78,6 +78,6 @@ _[Ss]cripts
 /Project_2/Migrations
 /Project_2/.vs/
 
-/Project_3/node_modules
-/Project_3/Migrations
-/Project_3/.vs/
+/Project_3/Project_3.Web/node_modules
+/Project_3/Project_3.Web/Migrations
+/Project_3//Project_3.Web/.vs/
