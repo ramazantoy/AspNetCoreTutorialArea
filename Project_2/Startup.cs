@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Project_2.Controllers;
+using Project_2.Services;
 
 namespace Project_2
 {
@@ -19,6 +20,10 @@ namespace Project_2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductService, ProductManager>();
+            
+            services.AddScoped<IScopedService, ScopedManager>();
+            services.AddSingleton<ISingletonService, SingletonManager>();
+            services.AddTransient<ITransientService, TransientManager>();
             services.AddControllersWithViews();
         }
 

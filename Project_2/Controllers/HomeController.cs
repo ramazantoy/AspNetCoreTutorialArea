@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_2.Data.Contexts;
 using Project_2.Data.Entities;
+using Project_2.Services;
 
 namespace Project_2.Controllers
 {
@@ -96,16 +97,27 @@ namespace Project_2.Controllers
       //     
       // }
 
+
+      ViewBag.Singleton = _singletonService.GuidId;
+      ViewBag.Transiet = _transientService.GuidId;
+      ViewBag.Scoped = _scopedService.GuidId;
       return View();
        }
 
 
        private  readonly  IProductService _productService;
 
-       public HomeController(IProductService productService) //dependency injection
+       public HomeController(IProductService productService, ITransientService transientService,IScopedService scopedService,ISingletonService singletonService) //dependency injection
        {
            _productService = productService;
+           _transientService = transientService;
+           _scopedService = scopedService;
+           _singletonService = singletonService;
        }
+
+       private readonly ITransientService _transientService;
+       private readonly IScopedService _scopedService;
+       private readonly ISingletonService _singletonService;
     }
 
     public interface IProductService

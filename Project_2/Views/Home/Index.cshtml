@@ -1,3 +1,6 @@
+@inject Project_2.Services.ISingletonService _singletonService;
+@inject Project_2.Services.IScopedService _scopedService;
+@inject Project_2.Services.ITransientService _transientService;
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
@@ -9,11 +12,29 @@
 </head>
 
 <body>
-    <paragraph></paragraph>
-    @await Component.InvokeAsync("Category")
-    <p class="text-danger lead">
-        Home Index Works
-    </p>
+@*     <paragraph></paragraph> *@
+@*     @await Component.InvokeAsync("Category") *@
+@* <p class="text-danger lead"> *@
+@*     Home Index Works *@
+@* </p> *@
+
+<p>
+    Singleton => @ViewBag.Singleton  @*same not change on refresh*@
+    <br/>
+    Singleton_2 =>@_singletonService.GuidId
+</p>
+<p>
+    Transiet => @ViewBag.Transiet @*change*@
+    <br/>
+    Transiet_2 =>@_transientService.GuidId
+</p>
+
+<p>
+    Scoped => @ViewBag.Scoped  @*change on every refresh request*@
+    <br/>
+    Scoped_2 =>@_scopedService.GuidId
+</p>
+
 
 </body>
 
