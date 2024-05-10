@@ -38,9 +38,10 @@ namespace Project_2.Controllers
        // var product = new Product { Price =4500 }; //for testing default value
        // context.Products.Add(product);
        // context.SaveChanges();
-       
-       
-       
+
+      // var s= context.Categories.ToList();
+      // var list = context.Categories.AsEnumerable(); //can foreach finish job on db
+      // var list2 = context.Categories.AsQueryable();//can foreach  not finish job on db
            return View();
        }
     }
