@@ -98,5 +98,26 @@ namespace Project_2.Controllers
 
       return View();
        }
+
+
+       private  readonly  IProductService _productService;
+
+       public HomeController(IProductService productService) //dependency injection
+       {
+           _productService = productService;
+       }
+    }
+
+    public interface IProductService
+    {
+        int GetTotal();
+    }
+
+    public class ProductManager : IProductService
+    {
+        public int GetTotal()
+        {
+            return 50;
+        }
     }
 }

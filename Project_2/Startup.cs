@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Project_2.Controllers;
 
 namespace Project_2
 {
@@ -17,7 +18,7 @@ namespace Project_2
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IProductService, ProductManager>();
             services.AddControllersWithViews();
         }
 
