@@ -57,6 +57,44 @@ namespace Project_2.Controllers
       // category.Name = "Changed";
       //
       // var updateStage = context.Entry(category).State;
+      
+      
+      //lazy=close for default,eager,explicit
+
+      //Lazy
+      // var product = context.Products.ToList();
+      
+      // foreach (var product1 in product)
+      // {
+      //     foreach (var product1ProductCategory in product1.ProductCategories)
+      //     {
+      //         
+      //     }
+      // }
+      
+      
+      //Eager
+      // var product = context.Products.Include(x=>x.ProductCategories).ToList();
+      //
+      // foreach (var product1 in product)
+      // {
+      //     foreach (var product1ProductCategory in product1.ProductCategories)
+      //     {
+      //         
+      //     }
+      // }
+      
+      //explicit join
+
+
+      // var product = context.Products.SingleOrDefault(x => x.Id == 1);
+      //
+      // context.Entry(product).Collection(x=>x.ProductCategories).Load();
+      //
+      // foreach (var productProductCategory in product.ProductCategories)
+      // {
+      //     
+      // }
 
       return View();
        }
