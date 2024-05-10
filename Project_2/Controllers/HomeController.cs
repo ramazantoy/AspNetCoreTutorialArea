@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project_2.Data.Contexts;
 using Project_2.Data.Entities;
 
@@ -42,7 +43,22 @@ namespace Project_2.Controllers
       // var s= context.Categories.ToList();
       // var list = context.Categories.AsEnumerable(); //can foreach finish job on db
       // var list2 = context.Categories.AsQueryable();//can foreach  not finish job on db
-           return View();
+
+
+
+      // var category = context.Categories.SingleOrDefault(x=>x.Id==1); //Tracking
+      //
+      // category.Name = "Changed";
+      //
+      // var updateStage = context.Entry(category).State;
+      
+      // var category = context.Categories.AsNoTracking().SingleOrDefault(x=>x.Id==1); //for client no tracking for db state=detached for not saving or deleting or updating
+      //
+      // category.Name = "Changed";
+      //
+      // var updateStage = context.Entry(category).State;
+
+      return View();
        }
     }
 }
