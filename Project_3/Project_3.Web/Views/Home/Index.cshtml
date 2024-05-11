@@ -3,25 +3,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
 <table class="mt-4  table table-hover table-bordered table-sm">
     <thead>
-        <tr>
-            <td>Name</td>
-            <td>Surname</td>
-            <td>Account Count</td> 
-        </tr>
+    <tr>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Account Count</td>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var applicationUser in Model)
-        {
-            <tr>
-                <td>@applicationUser.Name</td>
-                <td>@applicationUser.Surname</td>
-                <td><getAccountCount application-user-id="@applicationUser.Id"></getAccountCount></td>
-                <td>
-                    <a asp-action="Create" asp-controller="Account" asp-route-id="@applicationUser.Id">Create New Account</a>
-                </td>
-            </tr>
-        }
+    @foreach (var applicationUser in Model)
+    {
+        <tr>
+            <td>@applicationUser.Name</td>
+            <td>@applicationUser.Surname</td>
+            <td>
+                <getAccountCount application-user-id="@applicationUser.Id"></getAccountCount>
+            </td>
+            <td>
+                <a asp-action="Create" asp-controller="Account" asp-route-id="@applicationUser.Id">Create New Account</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+</body>
+</html>
