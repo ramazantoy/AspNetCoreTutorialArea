@@ -1,4 +1,26 @@
+@model List<ApplicationUser>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>Index Works</p>
+
+<table class="mt-4 table-hover table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Action</th> <!-- Eylem sütunu eklendi, düzenlemeye açık -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var applicationUser in Model)
+        {
+            <tr>
+                <td>@applicationUser.Name</td>
+                <td>@applicationUser.Surname</td>
+                <td>
+                    <!-- Eylem butonları buraya eklenebilir -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
