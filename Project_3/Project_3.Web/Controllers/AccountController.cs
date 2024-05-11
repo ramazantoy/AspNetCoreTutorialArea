@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Project_3.Web.Data.Context;
 using Project_3.Web.Data.Entities;
+using Project_3.Web.Data.Repositories;
 using Project_3.Web.Models;
 
 namespace Project_3.Web.Controllers
@@ -9,15 +10,18 @@ namespace Project_3.Web.Controllers
     public class AccountController : Controller
     {
         private readonly BankContext _bankContext;
+
+        private readonly ApplicationUserRepository _applicationUserRepository;
         
         public AccountController(BankContext bankContext)
         {
             _bankContext = bankContext;
+            _applicationUserRepository = new ApplicationUserRepository(_bankContext);
         }
 
         public IActionResult Create(int id)
         {
-            var userInfo = _bankContext.ApplicationUsers.Select(x=>new UserListModel{Id = x.Id,Name = x.Name,Surname = x.Surname}).SingleOrDefault(x => x.Id == id);
+            var userInfo = _applicationUserRepository.GetById(id);
             
             return View(userInfo);
         }
