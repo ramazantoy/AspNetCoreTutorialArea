@@ -29,8 +29,8 @@ namespace Project_3.Web
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            // services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-            // services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserMapper, UserMapper>();
             services.AddScoped<IAccountMapper, AccountMapper>();
             services.AddControllersWithViews();
