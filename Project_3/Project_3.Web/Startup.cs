@@ -28,8 +28,9 @@ namespace Project_3.Web
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project3Core; integrated security=true;");
             });
 
-            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            // services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserMapper, UserMapper>();
             services.AddScoped<IAccountMapper, AccountMapper>();
             services.AddControllersWithViews();
