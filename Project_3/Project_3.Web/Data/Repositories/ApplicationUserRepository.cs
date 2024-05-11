@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Project_3.Web.Data.Context;
 using Project_3.Web.Data.Entities;
+using Project_3.Web.Data.Interfaces;
 
 namespace Project_3.Web.Data.Repositories
 {
-    public class ApplicationUserRepository
+    public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly BankContext _bankContext;
 

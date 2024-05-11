@@ -1,42 +1,35 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Project_3.Web.Data.Context;
-using Project_3.Web.Data.Entities;
-using Project_3.Web.Data.Repositories;
+using Project_3.Web.Data.Interfaces;
+using Project_3.Web.Mapping;
 using Project_3.Web.Models;
 
 namespace Project_3.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly BankContext _bankContext;
-
-        private readonly ApplicationUserRepository _applicationUserRepository;
         
-        public AccountController(BankContext bankContext)
+        private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly IAccountRepository _accountRepository;
+        private readonly IUserMapper _userMapper;
+        private readonly IAccountMapper _accountMapper;
+        
+        public AccountController(IApplicationUserRepository applicationUserRepository,IAccountRepository accountRepository,IUserMapper userMapper,IAccountMapper accountMapper)
         {
-            _bankContext = bankContext;
-            _applicationUserRepository = new ApplicationUserRepository(_bankContext);
+            _applicationUserRepository = applicationUserRepository;
+            _accountRepository = accountRepository;
+            _userMapper = userMapper;
+            _accountMapper = accountMapper;
         }
 
         public IActionResult Create(int id)
         {
-            var userInfo = _applicationUserRepository.GetById(id);
-            
-            return View(userInfo);
+            return View(_userMapper.MapToUserListModel(_applicationUserRepository.GetById(id)));
         }
 
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
         {
-            _bankContext.Accounts.Add(new Account
-            {
-                AccountNumber = accountCreateModel.AccountNumber,
-                ApplicationUserId = accountCreateModel.ApplicationUserId, 
-                Balance = accountCreateModel.Balance
-            });
-
-            _bankContext.SaveChanges();
+            _accountRepository.Create(_accountMapper.Map(accountCreateModel));
             return RedirectToAction("Index", "Home");
         }
 
