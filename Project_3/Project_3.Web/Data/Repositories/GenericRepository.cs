@@ -26,9 +26,14 @@ namespace Project_3.Web.Data.Repositories
             _context.SaveChanges();
         }
 
-        public List<T> GetAll(T entity)
+        public List<T> GetAll()
         {
             return _context.Set<T>().ToList();
+        }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
         }
 
         public T GetById(int id)

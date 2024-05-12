@@ -30,6 +30,7 @@
             </td>
             <td>
                 <a asp-action="Create" asp-controller="Account" asp-route-id="@applicationUser.Id">Create New Account</a>
+                <a asp-action="GetByUserId" asp-controller="Account" asp-route-userId="@applicationUser.Id">Show Accounts List</a>
             </td>
         </tr>
     }
