@@ -1,8 +1,8 @@
-# Project_1: Learning MVC Project
+## Project_1: Learning MVC Project
 
 This project aims to help me learn MVC (Model-View-Controller) framework in .NET.
 
-## Topics Covered
+# Topics Covered
 
 - **TagHelpers**: Explanation of TagHelpers and their usage in MVC views.
 - **Dummy MVC Controllers**: Implementation and usage of dummy MVC controllers for testing purposes.
@@ -17,19 +17,12 @@ This project aims to help me learn MVC (Model-View-Controller) framework in .NET
 - **Custom Status Code**: Handling and returning custom status codes in MVC applications.
 - **ViewComponent**: Explanation and usage of view components for rendering reusable UI components.
 
-## Dummy Video
-
-
-
-
+# Dummy Video
 https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/63d3848d-2a65-4dc5-9d4e-6457c90f2bd5
 
-# Project_2: Learning Entity Framework Core
-
+## Project_2: Learning Entity Framework Core
 This project is dedicated to learning Entity Framework Core and its various features in .NET. It covers a wide range of topics including database creation, entity configuration, relationships, inheritance strategies, and dependency injection.
-
-## Topics Covered
-
+# Topics Covered
 - **Entity Framework Core**: Introduction to Entity Framework Core and its role in database interaction.
 - **Database Creation**: Setting up and configuring a database using Entity Framework Core migrations.
 - **Dummy Methods Testing**: Writing and testing dummy methods to understand Entity Framework Core functionality.
@@ -50,6 +43,27 @@ This project is dedicated to learning Entity Framework Core and its various feat
 - **Lazy, Eager, and Explicit Loading**: Testing different loading strategies for related entities.
 - **Dependency Injection Testing**: Creating and testing a dummy ProductManager class for dependency injection.
 - **AddScoped, AddSingleton, and AddTransient**: Understanding and testing different service lifetimes in dependency injection.
+# Db Diagram
+![Project2_db_diagram](https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/32d6c5f4-2efd-4999-9b6a-49aa5424def8)
+
+## Project_3: Dummy Account Management
+Project_3 is designed to provide users with the ability to manage multiple accounts within a system and facilitate fund transfers between accounts belonging to different users. Additionally, the project serves as an educational tool for individuals aiming to gain proficiency in software development concepts like the Repository Pattern, Mapper, and Unit of Work.
+# Topics Covered
+- **Repository Pattern**: Comprehensive exploration and implementation of the repository pattern for data access abstraction and separation of concerns.
+- **Generic Repository**: Understanding and utilizing generic repository to provide a common interface for data access operations across different entity types.
+- **Mapper**: Introduction to mapping techniques for transferring data between different layers of an application, improving maintainability and reducing coupling.
+- **Unit of Work Pattern**: Implementing unit of work pattern to manage transactions and ensure data consistency across multiple repository operations.
+- **Creating Models**: Designing and creating models to represent domain entities and define the structure of data within the application.
+# Db Diagram
+![Project3_db_diagram](https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/54f7ddd5-cfd8-4458-9b69-846170de36e0)
+# Dummy Video
+https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/8c38128c-a36c-4688-bc48-5242088dc63e
+
+
+
+
+
+
 
 
 
