@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using Project_3.Web.Data.Context;
 using Project_3.Web.Data.Interfaces;
 using Project_3.Web.Data.Repositories;
+using Project_3.Web.Data.UnitOfWork;
 using Project_3.Web.Mapping;
 
 namespace Project_3.Web
@@ -28,9 +29,10 @@ namespace Project_3.Web
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project3Core; integrated security=true;");
             });
 
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            // services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            // services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IUow, Uow>();
             services.AddScoped<IUserMapper, UserMapper>();
             services.AddScoped<IAccountMapper, AccountMapper>();
             services.AddControllersWithViews();

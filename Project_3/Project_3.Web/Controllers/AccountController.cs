@@ -27,43 +27,47 @@ namespace Project_3.Web.Controllers
         // }
 
 
-        private readonly IGenericRepository<Account> _accountRepository;
-        private readonly IGenericRepository<ApplicationUser> _userRepository;
+        // private readonly IGenericRepository<Account> _accountRepository;
+        // private readonly IGenericRepository<ApplicationUser> _userRepository;
         private readonly IUserMapper _userMapper;
+        private readonly IUow _uow;
 
-        public AccountController(IGenericRepository<Account> accountRepository,
-            IGenericRepository<ApplicationUser> userRepository, IUserMapper userMapper)
+        public AccountController(/*IGenericRepository<Account> accountRepository,
+            IGenericRepository<ApplicationUser> userRepository,*/ IUserMapper userMapper, IUow uow)
         {
-            _accountRepository = accountRepository;
-            _userRepository = userRepository;
+            // _accountRepository = accountRepository;
+            // _userRepository = userRepository;
             _userMapper = userMapper;
+            _uow = uow;
         }
 
         public IActionResult Create(int id)
         {
 
-            return View(_userMapper.MapToUserListModel(_userRepository.GetById(id)));
+            return View(_userMapper.MapToUserListModel(_uow.GetRepository<ApplicationUser>().GetById(id)));
 
         }
 
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
         {
-            _accountRepository.Create(new Account
+            _uow.GetRepository<Account>().Create(new Account
             {
                 AccountNumber = accountCreateModel.AccountNumber,
                 ApplicationUserId = accountCreateModel.ApplicationUserId,
                 Balance = accountCreateModel.Balance,
             });
+            
+            _uow.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult GetByUserId(int userId)
         {
-            var query = _accountRepository.GetQueryable();
+            var query = _uow.GetRepository<Account>().GetQueryable();
             var accountList = query.Where(x => x.ApplicationUserId == userId).ToList();
-            var user = _userRepository.GetById(userId);
+            var user = _uow.GetRepository<ApplicationUser>().GetById(userId);
 
             ViewBag.FullName = $"{user.Name} {user.Surname}";
 
@@ -83,7 +87,7 @@ namespace Project_3.Web.Controllers
         [HttpGet]
         public IActionResult SendMoney(int accountId)
         {
-            var query = _accountRepository.GetQueryable();
+            var query =  _uow.GetRepository<Account>().GetQueryable();
             var accounts = query.Where(x => x.Id != accountId).ToList();
             ViewBag.SenderAccountId = accountId;
 
@@ -101,13 +105,14 @@ namespace Project_3.Web.Controllers
     [HttpPost]
     public IActionResult SendMoney(SendMoneyModel sendMoneyModel)
     {
-      var toSendAccount=  _accountRepository.GetById(sendMoneyModel.AccountId);
-      var senderAccount = _accountRepository.GetById(sendMoneyModel.SenderAccountId);
+      var toSendAccount=  _uow.GetRepository<Account>().GetById(sendMoneyModel.AccountId);
+      var senderAccount = _uow.GetRepository<Account>().GetById(sendMoneyModel.SenderAccountId);
       senderAccount.Balance -= sendMoneyModel.Amount;
       
-      _accountRepository.Update(senderAccount);
+      _uow.GetRepository<Account>().Update(senderAccount);
       toSendAccount.Balance += sendMoneyModel.Amount;
-      _accountRepository.Update(toSendAccount);
+      _uow.GetRepository<Account>().Update(toSendAccount);
+      _uow.SaveChanges();
       return RedirectToAction("Index","Home");
 
     }
