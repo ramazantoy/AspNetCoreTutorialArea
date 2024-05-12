@@ -27,21 +27,19 @@ namespace Project_3.Web.Controllers
 
         private readonly IGenericRepository<Account> _accountRepository;
         private readonly IGenericRepository<ApplicationUser> _userRepository;
-        public AccountController(IGenericRepository<Account> accountRepository,IGenericRepository<ApplicationUser> userRepository)
+        private readonly IUserMapper _userMapper;
+        public AccountController(IGenericRepository<Account> accountRepository,IGenericRepository<ApplicationUser> userRepository, IUserMapper userMapper)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
+            _userMapper = userMapper;
         }
         
         public IActionResult Create(int id)
         {
-            var userInfo = _userRepository.GetById(id);
-            return View(new UserListModel
-            {
-                Name = userInfo.Name,
-                Surname = userInfo.Surname,
-                Id = userInfo.Id
-            });
+
+            return View(_userMapper.MapToUserListModel(_userRepository.GetById(id)));
+
         }
 
         [HttpPost]
