@@ -86,7 +86,7 @@ namespace Project_3.Web.Controllers
             var query = _accountRepository.GetQueryable();
             var accounts = query.Where(x => x.Id != accountId).ToList();
             ViewBag.SenderAccountId = accountId;
-            
+
             var canBeSentList = accounts.Select(account => new AccountListModel
                 {
                     AccountNumber = account.AccountNumber,
@@ -97,5 +97,19 @@ namespace Project_3.Web.Controllers
                 .ToList();
             return View(new SelectList(canBeSentList,"Id","AccountNumber"));
         }
+
+    [HttpPost]
+    public IActionResult SendMoney(SendMoneyModel sendMoneyModel)
+    {
+      var toSendAccount=  _accountRepository.GetById(sendMoneyModel.AccountId);
+      var senderAccount = _accountRepository.GetById(sendMoneyModel.SenderAccountId);
+      senderAccount.Balance -= sendMoneyModel.Amount;
+      
+      _accountRepository.Update(senderAccount);
+      toSendAccount.Balance += sendMoneyModel.Amount;
+      _accountRepository.Update(toSendAccount);
+      return RedirectToAction("Index","Home");
+
+    }
     }
 }
