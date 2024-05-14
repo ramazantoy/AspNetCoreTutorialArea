@@ -49,5 +49,10 @@ namespace Project_4.DataAccess.Repositories
         {
             _todocontext.Set<T>().Update(entity);
         }
+
+        public IQueryable<T> GetQuery()
+        {
+            return _todocontext.Set<T>().AsQueryable();
+        }
     }
 }

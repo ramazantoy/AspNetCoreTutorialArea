@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace Project_4.DataAccess.Interfaces
         void Remove(T entity);
         
         void Update(T entity);
+
+        IQueryable<T> GetQuery();
 
     }
 }
