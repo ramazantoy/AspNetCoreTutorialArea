@@ -57,5 +57,16 @@ namespace Project_4.Business.Services
 
             await _uow.SaveChanges();
         }
+
+        public  async Task Update(WorkUpdateDto dto)
+        {
+            _uow.GetRepository<Work>().Update(new Work()
+            {
+                Definition = dto.Definition,
+                Id = dto.Id,
+                IsCompleted = dto.IsCompleted
+            });
+            await _uow.SaveChanges();
+        }
     }
 }

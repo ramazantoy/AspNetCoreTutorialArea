@@ -15,5 +15,7 @@ namespace Project_4.Business.Interfaces
         Task<WorkListDto> GetById(int id);
 
         Task Remove(int id);
+
+        Task Update(WorkUpdateDto dto);
     }
 }
