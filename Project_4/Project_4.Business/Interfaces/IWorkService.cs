@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Project_4.Dtos.WorkDtos;
+using Project_4.Entities.Domains;
 
 namespace Project_4.Business.Interfaces
 {
@@ -9,5 +11,9 @@ namespace Project_4.Business.Interfaces
         Task<List<WorkListDto>> GetAll();
 
         Task Create(WorkCreateDto dto);
+
+        Task<WorkListDto> GetById(int id);
+
+        Task Remove(int id);
     }
 }

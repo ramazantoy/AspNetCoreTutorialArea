@@ -37,5 +37,25 @@ namespace Project_4.Business.Services
             });
            await _uow.SaveChanges();
         }
+
+        public  async Task<WorkListDto> GetById(int id)
+        {
+            var data =  await _uow.GetRepository<Work>().GetById(id);
+            return new()
+            {
+                Definition = data.Definition,
+                IsCompleted = data.IsCompleted,
+                Id = data.Id
+            };
+
+        }
+
+        public  async Task Remove(int id)
+        {
+            var deletedWork = await _uow.GetRepository<Work>().GetById(id);
+            _uow.GetRepository<Work>().Remove(deletedWork);
+
+            await _uow.SaveChanges();
+        }
     }
 }
