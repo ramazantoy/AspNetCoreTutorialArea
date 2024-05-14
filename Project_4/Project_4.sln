@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.DataAcces", "Project_4.DataAcces\Project_4.DataAcces.csproj", "{9E947DD9-09A3-4575-94CE-F5B1E58D9D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_4.Business", "Project_4.Business\Project_4.Business.csproj", "{BBD039DA-E465-49D5-97E7-BDDD562318DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.Business", "Project_4.Business\Project_4.Business.csproj", "{BBD039DA-E465-49D5-97E7-BDDD562318DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_4.Entities", "Project_4.Entities\Project_4.Entities.csproj", "{4718237D-CFE1-4883-837A-32FFC9ACB610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.Entities", "Project_4.Entities\Project_4.Entities.csproj", "{4718237D-CFE1-4883-837A-32FFC9ACB610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_4.Dtos", "Project_4.Dtos\Project_4.Dtos.csproj", "{4E670E2D-993B-4210-845F-DF393EAA2722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.Dtos", "Project_4.Dtos\Project_4.Dtos.csproj", "{4E670E2D-993B-4210-845F-DF393EAA2722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_4.UI", "Project_4.UI\Project_4.UI.csproj", "{9E47B10C-8EEC-448B-B886-0522B4600DFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.UI", "Project_4.UI\Project_4.UI.csproj", "{9E47B10C-8EEC-448B-B886-0522B4600DFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.DataAccess", "Project_4.DataAccess\Project_4.DataAccess.csproj", "{7644E931-A695-477A-A645-6F88C5C0B65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E947DD9-09A3-4575-94CE-F5B1E58D9D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E947DD9-09A3-4575-94CE-F5B1E58D9D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E947DD9-09A3-4575-94CE-F5B1E58D9D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E947DD9-09A3-4575-94CE-F5B1E58D9D72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBD039DA-E465-49D5-97E7-BDDD562318DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBD039DA-E465-49D5-97E7-BDDD562318DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBD039DA-E465-49D5-97E7-BDDD562318DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{9E47B10C-8EEC-448B-B886-0522B4600DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E47B10C-8EEC-448B-B886-0522B4600DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E47B10C-8EEC-448B-B886-0522B4600DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7644E931-A695-477A-A645-6F88C5C0B65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7644E931-A695-477A-A645-6F88C5C0B65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7644E931-A695-477A-A645-6F88C5C0B65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7644E931-A695-477A-A645-6F88C5C0B65D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
