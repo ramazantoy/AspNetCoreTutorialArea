@@ -7,6 +7,7 @@ namespace Project_4.Business.Interfaces
     public interface IWorkService
     {
         Task<List<WorkListDto>> GetAll();
-        
+
+        Task Create(WorkCreateDto dto);
     }
 }

@@ -27,5 +27,15 @@ namespace Project_4.Business.Services
 
            return list.Select(work => new WorkListDto() { Definition = work.Definition, Id = work.Id, IsCompleted = work.IsCompleted }).ToList();
         }
+
+        public async Task Create(WorkCreateDto dto)
+        {
+           await _uow.GetRepository<Work>().Create(new Work()
+            {
+                Definition = dto.Definition,
+                IsCompleted = dto.IsCompleted
+            });
+           await _uow.SaveChanges();
+        }
     }
 }
