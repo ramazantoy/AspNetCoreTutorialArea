@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project_4.Business.Interfaces;
+using Project_4.Dtos.WorkDtos;
 
 namespace Project_4.UI.Controllers
 {
@@ -18,6 +19,23 @@ namespace Project_4.UI.Controllers
         {
             var workList = await _workService.GetAll();
             return View(workList);
+        }
+
+        public IActionResult Create()
+        {
+            return View(new WorkCreateDto());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(WorkCreateDto workCreateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _workService.Create(workCreateDto);
+                return RedirectPermanent("Index");
+            }
+
+            return View(workCreateDto);
         }
     }
 }

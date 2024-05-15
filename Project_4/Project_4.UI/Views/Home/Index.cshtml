@@ -9,7 +9,9 @@
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
+
 <div class="container my-2">
+
     <table class="table table-hovered table-bordered table-sm">
         <thead>
         <tr>
@@ -27,6 +29,9 @@
         }
         </tbody>
     </table>
+    <div class="text-end my-2">
+        <a asp-action="Create" asp-controller="Home" class="btn-primary btn-sm">Add new work</a>
+    </div>
 </div>
 </body>
 </html>

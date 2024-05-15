@@ -1,0 +1,32 @@
+﻿@model WorkCreateDto
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Create Work</title>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="my-2">
+    <form asp-action="Create" asp-controller="Home" method="post">
+        <div class="mb-3">
+            <label>Work Name : </label>
+            <input asp-for="Definition" class="form-control"/>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" asp-for="IsCompleted">
+            <label class="form-check-label" for="IsCompleted">
+                Is Completed
+            </label>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn-primary" >Create Work</button>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>
+</body>
+</html>
