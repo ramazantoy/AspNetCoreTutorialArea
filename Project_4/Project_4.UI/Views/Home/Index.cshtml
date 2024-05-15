@@ -1,17 +1,31 @@
-﻿
+﻿@model List<WorkListDto>
 
 <!DOCTYPE html>
-
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    @* <meta charset="UTF-8"> *@
+    @* <meta name="viewport" content="width=device-width, initial-scale=1.0"> *@
     <title>Todo App</title>
-    <link href="~/node_modules\bootstrap\dist\css\bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
-<p>Index Works</p>
 <div class="container my-2">
-    <table>
-
+    <table class="table table-hovered table-bordered table-sm">
+        <thead>
+        <tr>
+            <th>Work Definition</th>
+            <th>IsCompleted</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var workListDto in Model)
+        {
+            <tr>
+                <td>@workListDto.Definition</td>
+                <td>@(workListDto.IsCompleted ? "Completed" : "Not Completed")</td>
+            </tr>
+        }
+        </tbody>
     </table>
 </div>
 </body>
