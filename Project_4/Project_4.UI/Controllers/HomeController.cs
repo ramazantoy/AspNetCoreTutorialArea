@@ -37,5 +37,31 @@ namespace Project_4.UI.Controllers
 
             return View(workCreateDto);
         }
+
+        public async Task<IActionResult> Update(int workId)
+        {
+            var workListDto =  await _workService.GetById(workId);
+            return View(new WorkUpdateDto
+            {
+                Id = workListDto.Id,
+                Definition = workListDto.Definition,
+                IsCompleted = workListDto.IsCompleted
+            });
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(WorkUpdateDto workUpdateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _workService.Update(workUpdateDto);
+                return RedirectToAction("Index");
+            }
+
+            return View(workUpdateDto);
+
+
+        }
     }
 }

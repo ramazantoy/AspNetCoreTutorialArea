@@ -40,12 +40,12 @@ namespace Project_4.Business.Services
 
         public  async Task<WorkListDto> GetById(int id)
         {
-            var data =  await _uow.GetRepository<Work>().GetById(id);
+            var data = await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id);
             return new()
             {
                 Definition = data.Definition,
                 IsCompleted = data.IsCompleted,
-                Id = data.Id
+                Id = id
             };
 
         }

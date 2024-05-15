@@ -16,7 +16,8 @@
         <thead>
         <tr>
             <th>Work Definition</th>
-            <th>IsCompleted</th>
+            <th>Is Completed</th>
+            <th>Update</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,9 @@
             <tr>
                 <td>@workListDto.Definition</td>
                 <td>@(workListDto.IsCompleted ? "Completed" : "Not Completed")</td>
+                <td>
+                    <a asp-action="Update" asp-controller="Home" asp-route-workId="@workListDto.Id" class="btn btn-warning btn-sm">Update</a>
+                </td>
             </tr>
         }
         </tbody>

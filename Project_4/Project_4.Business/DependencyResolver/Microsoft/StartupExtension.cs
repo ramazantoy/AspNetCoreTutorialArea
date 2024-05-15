@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Project_4.Business.Interfaces;
 using Project_4.Business.Services;
 using Project_4.DataAccess.Contexts;
@@ -14,6 +16,7 @@ namespace Project_4.Business.DependencyResolver.Microsoft
             services.AddDbContext<TodoContext>(opt =>
             {
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project4Core; integrated security=true;");
+                opt.LogTo(Console.WriteLine,LogLevel.Information);
             });
 
             services.AddScoped<IUow, Uow>();
