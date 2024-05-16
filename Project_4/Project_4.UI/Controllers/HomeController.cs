@@ -10,12 +10,9 @@ namespace Project_4.UI.Controllers
     {
         private IWorkService _workService;
 
-        private readonly IMapper _mapper;
-
         public HomeController(IWorkService workService, IMapper mapper)
         {
             _workService = workService;
-            _mapper = mapper;
         }
 
         // GET
@@ -44,7 +41,7 @@ namespace Project_4.UI.Controllers
 
         public async Task<IActionResult> Update(int workId)
         {
-            return View(_mapper.Map<WorkUpdateDto>(await _workService.GetById(workId)));
+            return View(await _workService.GetById<WorkUpdateDto>(workId));
         }
 
         [HttpPost]

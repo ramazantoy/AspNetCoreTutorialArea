@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Project_4.Business.Interfaces;
 using Project_4.DataAccess.UnitOfWork;
+using Project_4.Dtos.Interfaces;
 using Project_4.Dtos.WorkDtos;
 using Project_4.Entities.Domains;
 
@@ -40,10 +41,10 @@ namespace Project_4.Business.Services
            await _uow.SaveChanges();
         }
 
-        public  async Task<WorkListDto> GetById(int id)
+        public  async Task<IDto> GetById<IDto>(int id)
         {
        
-            return _mapper.Map<WorkListDto>( await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id));
+            return _mapper.Map<IDto>( await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id));
 
         }
 
