@@ -17,7 +17,7 @@ namespace Project_4.DataAccess.Interfaces
 
         Task Create(T entity);
 
-        void Remove(T entity);
+        void Remove(int id);
         
         void Update(T entity);
 

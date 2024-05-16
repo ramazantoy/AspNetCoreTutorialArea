@@ -41,9 +41,10 @@ namespace Project_4.DataAccess.Repositories
         }
 
 
-        public void Remove(T entity)
+        public void Remove(int id)
         {
-            _todocontext.Set<T>().Remove(entity);
+            var deletedEntity = _todocontext.Set<T>().Find(id);
+            _todocontext.Set<T>().Remove(deletedEntity);
         }
 
         public void Update(T entity)

@@ -52,8 +52,7 @@ namespace Project_4.Business.Services
 
         public  async Task Remove(int id)
         {
-            var deletedWork = await _uow.GetRepository<Work>().GetById(id);
-            _uow.GetRepository<Work>().Remove(deletedWork);
+            _uow.GetRepository<Work>().Remove(id);
 
             await _uow.SaveChanges();
         }

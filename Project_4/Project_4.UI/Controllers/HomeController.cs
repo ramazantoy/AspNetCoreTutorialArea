@@ -61,7 +61,12 @@ namespace Project_4.UI.Controllers
 
             return View(workUpdateDto);
 
+        }
 
+        public async Task<IActionResult> Remove(int id)
+        {
+            await _workService.Remove(id);
+            return RedirectToAction("Index");
         }
     }
 }
