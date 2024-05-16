@@ -2,6 +2,7 @@
 using Project_4.DataAccess.Contexts;
 using Project_4.DataAccess.Interfaces;
 using Project_4.DataAccess.Repositories;
+using Project_4.Entities.Domains;
 
 namespace Project_4.DataAccess.UnitOfWork
 {
@@ -15,7 +16,7 @@ namespace Project_4.DataAccess.UnitOfWork
             _todoContext = todoContext;
         }
 
-        public IRepository<T> GetRepository<T>() where T : class, new()
+        public IRepository<T> GetRepository<T>() where T : BaseEntity
         {
 
             return new Repository<T>(_todoContext);

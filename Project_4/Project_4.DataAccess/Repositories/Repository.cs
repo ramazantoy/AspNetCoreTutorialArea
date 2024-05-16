@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Project_4.DataAccess.Contexts;
 using Project_4.DataAccess.Interfaces;
+using Project_4.Entities.Domains;
 
 namespace Project_4.DataAccess.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class, new()
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly TodoContext _todocontext;
 
@@ -47,7 +48,19 @@ namespace Project_4.DataAccess.Repositories
 
         public void Update(T entity)
         {
-            _todocontext.Set<T>().Update(entity);
+            var entry = _todocontext.Entry(entity);
+            
+            if (entry.State != EntityState.Detached) return;
+            
+            var attachedEntity = _todocontext.Set<T>().Find(entity.Id);
+            if (attachedEntity != null)
+            {
+                _todocontext.Entry(attachedEntity).CurrentValues.SetValues(entity);
+            }
+            else
+            {
+                entry.State = EntityState.Modified;
+            }
         }
 
         public IQueryable<T> GetQuery()

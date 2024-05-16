@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Project_4.Entities.Domains;
 
 namespace Project_4.DataAccess.Interfaces
 {
-    public interface IRepository<T> where T: class,new()
+    public interface IRepository<T> where T: BaseEntity
     {
         Task<List<T>> GetAll();
 
