@@ -1,8 +1,7 @@
 ﻿namespace Project_4.Entities.Domains
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
-
     }
 }
