@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Project_4.Business.Interfaces;
 using Project_4.DataAccess.UnitOfWork;
 using Project_4.Dtos.WorkDtos;
@@ -12,41 +13,37 @@ namespace Project_4.Business.Services
     {
         private readonly IUow _uow;
 
-        public WorkService(IUow uow)
+        private readonly IMapper _mapper;
+
+        public WorkService(IUow uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
 
         public async Task<List<WorkListDto>> GetAll()
         {
-           var list= await _uow.GetRepository<Work>().GetAll();
-           if (list == null || list.Count < 0)
-           {
-               return null;
-           }
+           // var list= await _uow.GetRepository<Work>().GetAll();
+           // if (list == null || list.Count < 0)
+           // {
+           //     return null;
+           // }
+           //
+           // return list.Select(work => new WorkListDto() { Definition = work.Definition, Id = work.Id, IsCompleted = work.IsCompleted }).ToList();
 
-           return list.Select(work => new WorkListDto() { Definition = work.Definition, Id = work.Id, IsCompleted = work.IsCompleted }).ToList();
+          return _mapper.Map<List<WorkListDto>>(await _uow.GetRepository<Work>().GetAll());
         }
 
         public async Task Create(WorkCreateDto dto)
         {
-           await _uow.GetRepository<Work>().Create(new Work()
-            {
-                Definition = dto.Definition,
-                IsCompleted = dto.IsCompleted
-            });
+            await _uow.GetRepository<Work>().Create(_mapper.Map<Work>(dto));
            await _uow.SaveChanges();
         }
 
         public  async Task<WorkListDto> GetById(int id)
         {
-            var data = await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id);
-            return new()
-            {
-                Definition = data.Definition,
-                IsCompleted = data.IsCompleted,
-                Id = id
-            };
+       
+            return _mapper.Map<WorkListDto>( await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id));
 
         }
 
@@ -59,12 +56,8 @@ namespace Project_4.Business.Services
 
         public  async Task Update(WorkUpdateDto dto)
         {
-            _uow.GetRepository<Work>().Update(new Work()
-            {
-                Definition = dto.Definition,
-                Id = dto.Id,
-                IsCompleted = dto.IsCompleted
-            });
+            _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto));
+          
             await _uow.SaveChanges();
         }
     }
