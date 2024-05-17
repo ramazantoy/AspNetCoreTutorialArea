@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Project_4.Business.Interfaces;
 using Project_4.Dtos.WorkDtos;
@@ -10,7 +9,7 @@ namespace Project_4.UI.Controllers
     {
         private IWorkService _workService;
 
-        public HomeController(IWorkService workService, IMapper mapper)
+        public HomeController(IWorkService workService)
         {
             _workService = workService;
         }
