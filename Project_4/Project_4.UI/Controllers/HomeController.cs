@@ -17,8 +17,8 @@ namespace Project_4.UI.Controllers
         // GET
         public async Task<IActionResult> Index()
         {
-            var workList = await _workService.GetAll();
-            return View(workList);
+            var response = await _workService.GetAll();
+            return View(response.Data);
         }
 
         public IActionResult Create()
@@ -29,25 +29,29 @@ namespace Project_4.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkCreateDto workCreateDto)
         {
-            await _workService.Create(workCreateDto);
+            var response = await _workService.Create(workCreateDto); // if check for success
+
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Update(int workId)
         {
-            return View(await _workService.GetById<WorkUpdateDto>(workId));
+            var response = await _workService.GetById<WorkUpdateDto>(workId);
+            //if check
+
+            return View(response.Data);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(WorkUpdateDto workUpdateDto)
         {
-            await _workService.Update(workUpdateDto);
+            var response = await _workService.Update(workUpdateDto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Remove(int id)
         {
-            await _workService.Remove(id);
+            var response = await _workService.Remove(id);
             return RedirectToAction("Index");
         }
     }
