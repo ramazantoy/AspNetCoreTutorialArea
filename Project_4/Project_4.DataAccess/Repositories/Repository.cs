@@ -35,33 +35,35 @@ namespace Project_4.DataAccess.Repositories
             return asNoTracking ? await _todocontext.Set<T>().SingleOrDefaultAsync(filter) : await _todocontext.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter);
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> Find(int id)
         {
             return await _todocontext.Set<T>().FindAsync(id);
         }
 
 
-        public void Remove(int id)
-        {
-            var deletedEntity = _todocontext.Set<T>().Find(id);
-            _todocontext.Set<T>().Remove(deletedEntity);
+        public void Remove(T entity)
+        {   
+            // var deletedEntity = _todocontext.Set<T>().Find(id);
+            // _todocontext.Set<T>().Remove(deletedEntity);
+            _todocontext.Set<T>().Remove(entity);
         }
 
-        public void Update(T entity)
+        public void Update(T entity,T unChanged)
         {
-            var entry = _todocontext.Entry(entity);
-            
-            if (entry.State != EntityState.Detached) return;
-            
-            var attachedEntity = _todocontext.Set<T>().Find(entity.Id);
-            if (attachedEntity != null)
-            {
-                _todocontext.Entry(attachedEntity).CurrentValues.SetValues(entity);
-            }
-            else
-            {
-                entry.State = EntityState.Modified;
-            }
+            // var entry = _todocontext.Entry(entity);
+            //
+            // if (entry.State != EntityState.Detached) return;
+            //
+            // var attachedEntity = _todocontext.Set<T>().Find(entity.Id);
+            // if (attachedEntity != null)
+            // {
+            //     _todocontext.Entry(attachedEntity).CurrentValues.SetValues(entity);
+            // }
+            // else
+            // {
+            //     entry.State = EntityState.Modified;
+            // }
+            _todocontext.Entry(unChanged).CurrentValues.SetValues(entity);
         }
 
         public IQueryable<T> GetQuery()

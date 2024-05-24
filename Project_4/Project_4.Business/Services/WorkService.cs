@@ -59,7 +59,11 @@ namespace Project_4.Business.Services
 
         public async Task Remove(int id)
         {
-            _uow.GetRepository<Work>().Remove(id);
+            var removedEntity = await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id);
+
+            if (removedEntity == null) return;
+            
+            _uow.GetRepository<Work>().Remove(removedEntity);
 
             await _uow.SaveChanges();
         }
@@ -69,7 +73,10 @@ namespace Project_4.Business.Services
             var result = await _updateDtoValidator.ValidateAsync(dto);
             if (result.IsValid)
             {
-                _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto));
+                var updatedEntity =await _uow.GetRepository<Work>().Find(dto.Id);
+                if(updatedEntity==null) return;
+                
+                _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto),updatedEntity);
 
                 await _uow.SaveChanges();
             }

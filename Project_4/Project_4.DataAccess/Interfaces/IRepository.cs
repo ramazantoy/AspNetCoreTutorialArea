@@ -11,15 +11,15 @@ namespace Project_4.DataAccess.Interfaces
     {
         Task<List<T>> GetAll();
 
-        Task <T> GetById(int id);
+        Task <T> Find(int id);
 
         Task<T> GetByFilter(Expression<Func<T, bool>> filter, bool asNoTracking = false);
 
         Task Create(T entity);
 
-        void Remove(int id);
+        void Remove(T entity);
         
-        void Update(T entity);
+        void Update(T entity,T unChanged);
 
         IQueryable<T> GetQuery();
 

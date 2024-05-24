@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_4.UI", "Project_4.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.DataAccess", "Project_4.DataAccess\Project_4.DataAccess.csproj", "{7644E931-A695-477A-A645-6F88C5C0B65D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_4.Common", "Project_4.Common\Project_4.Common.csproj", "{7B409E11-F379-450B-AEBB-F5DC5A3B6E8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7644E931-A695-477A-A645-6F88C5C0B65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7644E931-A695-477A-A645-6F88C5C0B65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7644E931-A695-477A-A645-6F88C5C0B65D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B409E11-F379-450B-AEBB-F5DC5A3B6E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B409E11-F379-450B-AEBB-F5DC5A3B6E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B409E11-F379-450B-AEBB-F5DC5A3B6E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B409E11-F379-450B-AEBB-F5DC5A3B6E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
