@@ -29,13 +29,8 @@ namespace Project_4.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkCreateDto workCreateDto)
         {
-            if (ModelState.IsValid)
-            {
-                await _workService.Create(workCreateDto);
-                return RedirectPermanent("Index");
-            }
-
-            return View(workCreateDto);
+            await _workService.Create(workCreateDto);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Update(int workId)
@@ -46,13 +41,8 @@ namespace Project_4.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(WorkUpdateDto workUpdateDto)
         {
-            if (ModelState.IsValid)
-            {
-                await _workService.Update(workUpdateDto);
-                return RedirectToAction("Index");
-            }
-
-            return View(workUpdateDto);
+            await _workService.Update(workUpdateDto);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Remove(int id)

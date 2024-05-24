@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using Project_4.Business.Interfaces;
 using Project_4.Business.ValidationRules;
 using Project_4.DataAccess.UnitOfWork;
-using Project_4.Dtos.Interfaces;
 using Project_4.Dtos.WorkDtos;
 using Project_4.Entities.Domains;
 
@@ -17,10 +16,16 @@ namespace Project_4.Business.Services
 
         private readonly IMapper _mapper;
 
-        public WorkService(IUow uow, IMapper mapper)
+        private readonly IValidator<WorkCreateDto> _createDtoValidator;
+        private readonly IValidator<WorkUpdateDto> _updateDtoValidator;
+
+        public WorkService(IUow uow, IMapper mapper, IValidator<WorkCreateDto> createDtoValidator,
+            IValidator<WorkUpdateDto> updateDtoValidator)
         {
             _uow = uow;
             _mapper = mapper;
+            _createDtoValidator = createDtoValidator;
+            _updateDtoValidator = updateDtoValidator;
         }
 
         public async Task<List<WorkListDto>> GetAll()
@@ -38,14 +43,13 @@ namespace Project_4.Business.Services
 
         public async Task Create(WorkCreateDto dto)
         {
-            var validator = new WorkCreateDtoValidator();
-           var validationResult= validator.Validate(dto);
-           if (validationResult.IsValid)
-           {
-               await _uow.GetRepository<Work>().Create(_mapper.Map<Work>(dto));
-               await _uow.SaveChanges();
-           }
-    
+            var validationResult = await _createDtoValidator.ValidateAsync(dto);
+
+            if (validationResult.IsValid)
+            {
+                await _uow.GetRepository<Work>().Create(_mapper.Map<Work>(dto));
+                await _uow.SaveChanges();
+            }
         }
 
         public async Task<IDto> GetById<IDto>(int id)
@@ -62,9 +66,13 @@ namespace Project_4.Business.Services
 
         public async Task Update(WorkUpdateDto dto)
         {
-            _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto));
+            var result = await _updateDtoValidator.ValidateAsync(dto);
+            if (result.IsValid)
+            {
+                _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto));
 
-            await _uow.SaveChanges();
+                await _uow.SaveChanges();
+            }
         }
     }
 }
