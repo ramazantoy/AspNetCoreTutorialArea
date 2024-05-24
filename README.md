@@ -59,6 +59,23 @@ Project_3 is designed to provide users with the ability to manage multiple accou
 # Dummy Video
 https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/8c38128c-a36c-4688-bc48-5242088dc63e
 
+## Project_4: Dummy Todo List App
+This project is a simple Todo List application developed using an N-tier architecture. The application is divided into several layers, including Domain, Business, UI, DTO, Common, and Entities.
+  
+# Topics Covered
+- **N-tier layered architecture**: Separates the application into different layers to promote modularity and scalability.
+- **Fluent Validation:** Validates data using a fluent API for better readability and maintainability.
+- **Custom Extensions:** Adds custom methods to existing classes to extend their functionality.
+- **Mapping techniques:** Converts data between different layers using mappers to ensure proper data flow.
+
+# Db Diagram
+![Project_4 DB](https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/7f8cb186-46cb-417e-9862-fa9f5b37a9fe)
+# Dummy Video
+
+https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/ae1abedb-bc27-491d-903a-0241c7ff944a
+
+
+
 
 
 
