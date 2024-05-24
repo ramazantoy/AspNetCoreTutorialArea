@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using Project_4.Business.Extensions;
 using Project_4.Business.Interfaces;
 using Project_4.Business.ValidationRules;
 using Project_4.Common.ResponseObjects;
@@ -53,19 +54,9 @@ namespace Project_4.Business.Services
                 await _uow.SaveChanges();
                 return new Response<WorkCreateDto>(ResponseType.Success, dto);
             }
-
-            var customValidationErrors = new List<CustomValidationError>();
-            foreach (var resultError in validationResult.Errors)
-            {
-                customValidationErrors.Add(new CustomValidationError
-                {
-                    ErrorMessage = resultError.ErrorMessage,
-                    PropertyName = resultError.PropertyName
-                });
             
-            }
 
-            return new Response<WorkCreateDto>(ResponseType.ValidationError, dto, customValidationErrors);
+            return new Response<WorkCreateDto>(ResponseType.ValidationError, dto, validationResult.ConvertToCustomValidationError());
         }
 
         public async Task<IResponse<IDto>> GetById<IDto>(int id)
@@ -106,17 +97,10 @@ namespace Project_4.Business.Services
                 return new Response<WorkUpdateDto>(ResponseType.Success,dto);
             }
             
-            var customValidationErrors = new List<CustomValidationError>();
-            foreach (var resultError in result.Errors)
-            {
-                customValidationErrors.Add(new CustomValidationError
-                {
-                    ErrorMessage = resultError.ErrorMessage,
-                    PropertyName = resultError.PropertyName
-                });
-            }
+            
+        
 
-            return new Response<WorkUpdateDto>(ResponseType.ValidationError,dto,customValidationErrors);
+            return new Response<WorkUpdateDto>(ResponseType.ValidationError,dto,result.ConvertToCustomValidationError());
             
         }
     }
