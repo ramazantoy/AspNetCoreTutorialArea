@@ -7,8 +7,8 @@ namespace Project_4.Business.ValidationRules
     {
         public WorkUpdateDtoValidator()
         {
-            RuleFor(x => x.Definition).NotEmpty(); 
-            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.Definition).NotEmpty().WithMessage("Definition must be not empty");
+            RuleFor(x => x.Id).NotEmpty().WithMessage("Id must be not empty");
         }
     }
 }
