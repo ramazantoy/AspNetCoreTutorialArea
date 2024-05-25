@@ -1,8 +1,10 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Project_5.Context;
 using Project_5.Entities;
 
@@ -29,6 +31,14 @@ namespace Project_5
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+            
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
+                RequestPath = "/node_modules"
+            });
 
             app.UseRouting();
 
