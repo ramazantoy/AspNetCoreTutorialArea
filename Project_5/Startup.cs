@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Project_5.Context;
+using Project_5.Entities;
 
 namespace Project_5
 {
@@ -13,6 +14,7 @@ namespace Project_5
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Project5Context>();
             services.AddDbContext<Project5Context>(opt =>
             {
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project5Core; integrated security=true;");
