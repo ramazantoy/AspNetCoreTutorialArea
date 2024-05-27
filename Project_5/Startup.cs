@@ -16,7 +16,16 @@ namespace Project_5
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Project5Context>();
+            services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                //for development
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 1;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+
+            }).AddEntityFrameworkStores<Project5Context>();
             services.AddDbContext<Project5Context>(opt =>
             {
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project5Core; integrated security=true;");
