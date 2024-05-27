@@ -1,9 +1,9 @@
 ﻿@model Project_5.Models.UserCreateModel;
 @{
-    Layout = "_Layout";
+    Layout = "_NoNavbarLayout";
 }
 
-<form asp-action="Create" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
+<form asp-action="SignUp" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
     <h2 class="text-center mb-4">Sign Up</h2>
     <div class="mb-3">
         <label class="form-label">Username</label>
@@ -36,6 +36,9 @@
     </div>
     <div class="mb-3 text-center">
         <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </div>
+    <div class="text-center mt-3">
+        <p>Already have an account? <a asp-action="SignIn" asp-controller="Home">Login here</a>.</p>
     </div>
     <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
 </form>

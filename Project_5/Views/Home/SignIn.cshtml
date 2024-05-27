@@ -1,7 +1,7 @@
 ﻿@model UserSignInModel
 
 @{
-    Layout = "_Layout";
+    Layout = "_NoNavbarLayout";
 }
 
 <form asp-action="SignIn" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
@@ -19,5 +19,8 @@
     <div class="mb-3 text-center">
         <button type="submit" class="btn btn-primary w-100">Sign In</button>
     </div>
+       <div class="text-center mt-3">
+            <p>Dont have an account? <a asp-action="SignUp" asp-controller="Home">Sign up here</a>.</p>
+        </div>
     <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
 </form>
