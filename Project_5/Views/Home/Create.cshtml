@@ -3,38 +3,39 @@
     Layout = "_Layout";
 }
 
-<form asp-action="Create" method="post" class="p-4 w-75 mx-auto shadow">
+<form asp-action="Create" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
+    <h2 class="text-center mb-4">Sign Up</h2>
     <div class="mb-3">
-        <label>User Name</label>
-        <input asp-for="UserName" class="form-control"/>
+        <label class="form-label">Username</label>
+        <input asp-for="UserName" class="form-control" placeholder="Enter your username"/>
         <span class="text-danger" asp-validation-for="UserName"></span>
     </div>
     <div class="mb-3">
-        <label>Password</label>
-        <input asp-for="Password" class="form-control" type="password"/>
+        <label class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" type="password" placeholder="Enter your password"/>
         <span class="text-danger" asp-validation-for="Password"></span>
     </div>
     <div class="mb-3">
-        <label>ConfirmPassword</label>
-        <input asp-for="ConfirmPassword" class="form-control" type="password"/>
+        <label class="form-label">Confirm Password</label>
+        <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm your password"/>
         <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
     </div>
     <div class="mb-3">
-        <label>Email</label>
-        <input asp-for="Email" class="form-control"/> @*type="email"*@
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" type="email" placeholder="Enter your email"/>
         <span class="text-danger" asp-validation-for="Email"></span>
     </div>
     <div class="mb-3">
-        <label>Gender</label>
+        <label class="form-label">Gender</label>
         <select asp-for="Gender" class="form-control">
             <option value="" disabled selected>Select Gender</option>
-            <option value="Man">Man</option>
-            <option value="Woman">Woman</option>
+            <option value="Man">Male</option>
+            <option value="Woman">Female</option>
         </select>
         <span class="text-danger" asp-validation-for="Gender"></span>
     </div>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Create</button>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
     </div>
     <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
 </form>

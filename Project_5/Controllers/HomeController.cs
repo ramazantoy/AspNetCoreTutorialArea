@@ -9,10 +9,12 @@ namespace Project_5.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(UserManager<AppUser> userManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET
@@ -47,6 +49,34 @@ namespace Project_5.Controllers
                  ModelState.AddModelError("",resultError.Description);
              }
             }
+            return View(model);
+        }
+
+        public IActionResult SignIn()
+        {
+            return View(new UserSignInModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(UserSignInModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
+                if (signInResult.Succeeded)
+                {
+                    
+                }
+                else if (signInResult.IsLockedOut)
+                {
+                    //locked
+                }
+                else if (signInResult.IsNotAllowed)
+                {
+                    //email or phone number verification false
+                }
+            }
+
             return View(model);
         }
     }

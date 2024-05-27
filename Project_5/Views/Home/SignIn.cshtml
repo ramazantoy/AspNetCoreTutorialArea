@@ -1,0 +1,23 @@
+﻿@model UserSignInModel
+
+@{
+    Layout = "_Layout";
+}
+
+<form asp-action="SignIn" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
+    <h2 class="text-center mb-4">Sign In</h2>
+    <div class="mb-3">
+        <label class="form-label">User Name</label>
+        <input asp-for="UserName" class="form-control" placeholder="Enter your username"/>
+        <span class="text-danger" asp-validation-for="UserName"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" type="password" placeholder="Enter your password"/>
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+    </div>
+    <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+</form>

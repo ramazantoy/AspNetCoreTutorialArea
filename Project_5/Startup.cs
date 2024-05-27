@@ -24,6 +24,7 @@ namespace Project_5
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireNonAlphanumeric = false;
+                // opt.SignIn.RequireConfirmedEmail = true;
 
             }).AddEntityFrameworkStores<Project5Context>();
             services.AddDbContext<Project5Context>(opt =>
