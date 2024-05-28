@@ -28,7 +28,7 @@
                 @if (User != null && User.IsInRole("Admin"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="#">Admin Panel</a>
+                        <a class="nav-link text-danger" asp-action="AdminPanel" asp-controller="Home">Admin Panel</a>
                     </li>
                 }
             </ul>

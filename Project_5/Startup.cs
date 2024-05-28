@@ -1,6 +1,8 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,16 @@ namespace Project_5
                 // opt.SignIn.RequireConfirmedEmail = true;
 
             }).AddEntityFrameworkStores<Project5Context>();
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.SameSite = SameSiteMode.Strict;//only for this domain
+                opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opt.Cookie.Name = "Project5_Cookie";
+                opt.ExpireTimeSpan = TimeSpan.FromDays(25);
+                opt.LoginPath = new PathString("/Home/SignIn");
+            });
             services.AddDbContext<Project5Context>(opt =>
             {
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project5Core; integrated security=true;");

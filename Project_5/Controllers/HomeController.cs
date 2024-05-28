@@ -26,14 +26,10 @@ namespace Project_5.Controllers
         }
 
         // GET
+        [Authorize]
         public IActionResult Index()
         {
-            if (User != null && User.Identity!.IsAuthenticated)
-            {
-                return View();
-            }
-            
-            return RedirectToAction("SignUp");
+            return View();
         }
 
         public IActionResult SignUp()
@@ -55,13 +51,18 @@ namespace Project_5.Controllers
                 var identityResult = await _userManager.CreateAsync(newUser, model.Password);
                 if (identityResult.Succeeded)
                 {
-                    // await _roleManager.CreateAsync(new()
-                    // {
-                    //     Name = "Admin",
-                    //     CreatedTime = DateTime.Now
-                    // });
-                    // await _userManager.AddToRoleAsync(newUser, "Admin");
-                    return RedirectToAction("Index");
+                    var memberRole = await _roleManager.FindByNameAsync("Member");
+                    if (memberRole == null)
+                    {
+                        await _roleManager.CreateAsync(new()
+                        {
+                            Name = "Member",
+                            CreatedTime = DateTime.Now
+                        });
+                    }
+
+                    await _userManager.AddToRoleAsync(newUser, "Member");
+                    
                 }
 
                 foreach (var resultError in identityResult.Errors)
@@ -73,9 +74,12 @@ namespace Project_5.Controllers
             return View(model);
         }
 
-        public IActionResult SignIn()
+        public IActionResult SignIn(string returnUrl)
         {
-            return View(new UserSignInModel());
+            return View(new UserSignInModel()
+            {
+                ReturnUrl = returnUrl
+            });
         }
 
 
@@ -84,13 +88,21 @@ namespace Project_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult =
-                    await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
+             
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    var user = await _userManager.FindByNameAsync(model.UserName);
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    return RedirectToAction(roles.Contains("Admin") ? "AdminPanel" : "Panel");
                 }
-                else if (signInResult.IsLockedOut)
+
+                if (signInResult.IsLockedOut)
                 {
                     //locked
                 }
@@ -99,10 +111,14 @@ namespace Project_5.Controllers
                     //email or phone number verification false
                 }
             }
+         
+            ModelState.AddModelError("","Username or password is not correct");
+            
 
             return View(model);
         }
 
+        
         [Authorize /*(Roles="Admin, Member")*/]
         public IActionResult GetUserInfo()
         {
@@ -119,6 +135,24 @@ namespace Project_5.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminPanel()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Member")]
+        public IActionResult Panel()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Member")]
+        public IActionResult MemberPage()
+        {
+            return View();
         }
     }
 }
