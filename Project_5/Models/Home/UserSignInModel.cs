@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Project_5.Models
+namespace Project_5.Models.Home
 {
     public class UserSignInModel
     {

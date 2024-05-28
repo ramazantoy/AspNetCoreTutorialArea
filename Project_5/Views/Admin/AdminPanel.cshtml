@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Project_5.Models.Admin.UserModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<a asp-controller="Admin" asp-action="Create">Create New User</a>
+<h2>User List</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Mail</th>
+        <th>Rolles</th>
+        <th>Transactions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Mail</td>
+            <td>@string.Join(", ", user.Roles)</td>
+
+            <td>
+                <a asp-action="EditUser" asp-controller="Admin"  asp-route-userName="@user.UserName" class="btn btn-primary">Düzenle</a>
+                @if (!user.Roles.Contains("Admin"))
+                {
+                    <a asp-action="Delete" asp-controller="Admin" asp-route-userName="@user.UserName" class="btn btn-danger" onclick="return confirm('Are you sure for remove this user?');">Sil</a>
+                }
+            </td>
+
+
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+﻿@model Project_5.Models.Admin.UserEditModel
+
+@{
+    Layout = "_NoNavbarLayout";
+}
+
+<h2>Edit User</h2>
+
+<form asp-action="UpdateUser" method="post">
+    <input type="hidden" name="userCurrentName" value="@ViewBag.UserCurrentName"/>
+
+    <div class="form-group mb-3">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" value="@Model.UserName"/>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Mail" class="control-label"></label>
+        <input asp-for="Mail" class="form-control" readonly value="@Model.Mail"/>
+        <span asp-validation-for="Mail" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <input type="submit" value="Kaydet" class="btn btn-primary"/>
+        <a asp-action="AdminPanel" class="btn btn-secondary">Geri</a>
+    </div>
+    
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <t class="text-danger mt-2">*@ViewBag.ErrorMessage</t>
+    }
+  
+</form>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project_5.Entities;
-using Project_5.Models;
+using Project_5.Models.Home;
 
 namespace Project_5.Controllers
 {
@@ -110,9 +110,9 @@ namespace Project_5.Controllers
                         return Redirect(model.ReturnUrl);
                     }
                     var user = await _userManager.FindByNameAsync(model.UserName);
-                    var roles = await _userManager.GetRolesAsync(user);
+                    // var roles = await _userManager.GetRolesAsync(user);
 
-                    return RedirectToAction(roles.Contains("Admin") ? "AdminPanel" : "Panel");
+                    return RedirectToAction("Index");
                 }
 
                 if (signInResult.IsLockedOut)
@@ -142,7 +142,6 @@ namespace Project_5.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public  async Task<IActionResult> SignOut()
         {
@@ -150,22 +149,7 @@ namespace Project_5.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Member")]
-        public IActionResult Panel()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Member")]
-        public IActionResult MemberPage()
-        {
-            return View();
-        }
+    
+        
     }
 }

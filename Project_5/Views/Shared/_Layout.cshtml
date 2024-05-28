@@ -28,13 +28,13 @@
                 @if (User != null && User.IsInRole("Admin"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-danger" asp-action="AdminPanel" asp-controller="Home">Admin Panel</a>
+                        <a class="nav-link text-danger" asp-action="AdminPanel" asp-controller="Admin">Admin Panel</a>
                     </li>
                 }
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form method="post" asp-action="SignOut" class="form-inline">
+                    <form method="post" asp-action="SignOut" asp-controller="Home" class="form-inline">
                         <button type="submit" class="btn btn-link nav-link ">Sign Out</button>
                     </form>
                 </li>

@@ -8,14 +8,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Project_5.Context;
+// using Project_5.CustomDescriber;
 using Project_5.Entities;
 
 namespace Project_5
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentity<AppUser, AppRole>(opt =>
@@ -28,7 +27,7 @@ namespace Project_5
                 opt.Password.RequireNonAlphanumeric = false;
                 // opt.SignIn.RequireConfirmedEmail = true;
 
-            }).AddEntityFrameworkStores<Project5Context>();
+            })/*.AddErrorDescriber<CustomErrorDescriber>()*/.AddEntityFrameworkStores<Project5Context>();
 
             services.ConfigureApplicationCookie(opt =>
             {
@@ -38,6 +37,7 @@ namespace Project_5
                 opt.Cookie.Name = "Project5_Cookie";
                 opt.ExpireTimeSpan = TimeSpan.FromDays(25);
                 opt.LoginPath = new PathString("/Home/SignIn");
+                opt.AccessDeniedPath = new PathString("/Home/Index");
             });
             services.AddDbContext<Project5Context>(opt =>
             {
