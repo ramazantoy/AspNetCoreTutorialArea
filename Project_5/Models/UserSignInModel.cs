@@ -10,5 +10,7 @@ namespace Project_5.Models
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }
+        
+        public bool RememberMe { get; set; }
     }
 }

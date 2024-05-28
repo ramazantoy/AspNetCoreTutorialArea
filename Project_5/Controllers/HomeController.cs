@@ -32,11 +32,18 @@ namespace Project_5.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult SignUp()
         {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+
             return View(new UserCreateModel());
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> SignUp(UserCreateModel model)
         {
@@ -74,8 +81,14 @@ namespace Project_5.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult SignIn(string returnUrl)
         {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+
             return View(new UserSignInModel()
             {
                 ReturnUrl = returnUrl
@@ -88,7 +101,7 @@ namespace Project_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
              
                 if (signInResult.Succeeded)
                 {
@@ -131,7 +144,7 @@ namespace Project_5.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> LogOut()
+        public  async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
