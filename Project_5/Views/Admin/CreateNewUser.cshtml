@@ -1,0 +1,40 @@
+﻿@model Project_5.Models.Admin.AdminUserCreateModel;
+@{
+
+    Layout = "_Layout";
+}
+
+<html lang="en">
+<head>
+    <title>Create New User</title>
+</head>
+<body>
+<form asp-action="CreateNewUser" method="post" class="p-4 w-50 mx-auto shadow rounded bg-light">
+    <h2 class="text-center mb-4">Create Panel</h2>
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input asp-for="UserName" class="form-control" placeholder="Enter your username"/>
+        <span class="text-danger" asp-validation-for="UserName"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" type="email" placeholder="Enter your email"/>
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Gender</label>
+        <select asp-for="Gender" class="form-control">
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Man">Male</option>
+            <option value="Woman">Female</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Gender"></span>
+    </div>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary w-100">Create New User</button>
+    </div>
+    <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+</form>
+</body>
+</html>
+

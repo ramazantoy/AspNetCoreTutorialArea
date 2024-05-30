@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-<a asp-controller="Admin" asp-action="Create">Create New User</a>
+<a asp-controller="Admin" asp-action="CreateNewUser">Create New User</a>
 <h2>User List</h2>
 
 <table class="table table-bordered table-striped">
@@ -26,10 +26,10 @@
             <td>@string.Join(", ", user.Roles)</td>
 
             <td>
-                <a asp-action="EditUser" asp-controller="Admin"  asp-route-userName="@user.UserName" class="btn btn-primary">Düzenle</a>
+                <a asp-action="EditUser" asp-controller="Admin"  asp-route-userName="@user.UserName" class="btn btn-primary">Edit</a>
                 @if (!user.Roles.Contains("Admin"))
                 {
-                    <a asp-action="Delete" asp-controller="Admin" asp-route-userName="@user.UserName" class="btn btn-danger" onclick="return confirm('Are you sure for remove this user?');">Sil</a>
+                    <a asp-action="Delete" asp-controller="Admin" asp-route-userName="@user.UserName" class="btn btn-danger" onclick="return confirm('Are you sure for remove this user?');">Remove</a>
                 }
             </td>
 

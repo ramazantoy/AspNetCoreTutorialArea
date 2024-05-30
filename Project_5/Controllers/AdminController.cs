@@ -14,10 +14,12 @@ namespace Project_5.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public AdminController(UserManager<AppUser> userManager)
+        public AdminController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> AdminPanel()
@@ -96,6 +98,7 @@ namespace Project_5.Controllers
 
             if (result.Succeeded)
             {
+           
                 return RedirectToAction("AdminPanel");
             }
 
@@ -107,14 +110,49 @@ namespace Project_5.Controllers
             return RedirectToAction("EditUser", new { userName = userCurrentName });
         }
 
-        public IActionResult Create()
+        public IActionResult CreateNewUser()
         {
-            return View();
+            return View(new AdminUserCreateModel());
         }
 
         [HttpPost]
-        public IActionResult Create(UserCreateModel userCreateModel)
+        public async Task<IActionResult> CreateNewUser(AdminUserCreateModel userCreateModel)
         {
+            if (ModelState.IsValid)
+            {
+                var newUser = new AppUser()
+                {
+                    UserName = userCreateModel.UserName,
+                    Email = userCreateModel.Email,
+                    Gender = userCreateModel.Gender,
+                };
+
+               var result = await _userManager.CreateAsync(newUser, userCreateModel.UserName + "9876");
+
+               if (result.Succeeded)
+               {
+                   var roleResult=await _userManager.AddToRoleAsync(newUser, "Member");
+                   if (roleResult.Succeeded)
+                   {
+                       return RedirectToAction("AdminPanel");
+                   }
+                   foreach (var resultError in roleResult.Errors)
+                   {
+                       ModelState.AddModelError("",resultError.Description);
+                   }
+
+               }
+               else
+               {
+                   foreach (var resultError in result.Errors)
+                   {
+                       ModelState.AddModelError("",resultError.Description);
+                   }
+
+               }
+               
+             
+            }
             return View();
         }
     }
