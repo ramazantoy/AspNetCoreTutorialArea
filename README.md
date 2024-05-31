@@ -74,6 +74,22 @@ This project is a simple Todo List application developed using an N-tier archite
 
 https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/ae1abedb-bc27-491d-903a-0241c7ff944a
 
+## Project_5: Learning Net Core Identity
+This project focuses on implementing user authentication and authorization features, including user sign-up, sign-in, and preventing unauthorized access. Additionally, it explores the concept of admin roles and permissions.
+
+# Topics Covered
+
+- What is ASP.NET Core Identity and how to use it?
+- Sign up, sign in, and sign out operations for users.
+- Add role remove roles for admins.
+- Add user remove user for admins.
+
+# Db Diagram
+![Project_5 DB](https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/b9abef26-02f2-4d12-96a5-fb9cdb0e1ce8)
+
+# Dummy Video
+https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/76bd2e0a-9fee-498e-a9db-9c863562f88b
+
 
 
 
