@@ -1,0 +1,47 @@
+﻿@model List<Project_5.Entities.AppRole>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Roles</title>
+</head>
+<body>
+
+<div class="mb-4 text-left">
+    <a asp-controller="Admin" asp-action="CreateNewRole" class="btn btn-primary mx-2">Create New Role</a>
+</div>
+<h2 class="my-4 text-left">Roles</h2>
+<table class="table table-hover table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Created Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var role in Model)
+    {
+        @if (role.Name != "Admin")
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td>@role.CreatedTime)</td>
+                <td>
+                    <a asp-action="EditRole" asp-controller="Admin" asp-route-roleName="@role.Name" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="DeleteRole" asp-controller="Admin" asp-route-roleName="@role.Name" class="btn btn-danger btn-sm">Remove</a>
+
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -48,6 +49,7 @@ namespace Project_5.Controllers
             {
                 await _userManager.DeleteAsync(user);
             }
+
             return RedirectToAction("AdminPanel");
         }
 
@@ -98,7 +100,6 @@ namespace Project_5.Controllers
 
             if (result.Succeeded)
             {
-           
                 return RedirectToAction("AdminPanel");
             }
 
@@ -127,34 +128,135 @@ namespace Project_5.Controllers
                     Gender = userCreateModel.Gender,
                 };
 
-               var result = await _userManager.CreateAsync(newUser, userCreateModel.UserName + "9876");
+                var result = await _userManager.CreateAsync(newUser, userCreateModel.UserName + "9876");
 
-               if (result.Succeeded)
-               {
-                   var roleResult=await _userManager.AddToRoleAsync(newUser, "Member");
-                   if (roleResult.Succeeded)
-                   {
-                       return RedirectToAction("AdminPanel");
-                   }
-                   foreach (var resultError in roleResult.Errors)
-                   {
-                       ModelState.AddModelError("",resultError.Description);
-                   }
+                if (result.Succeeded)
+                {
+                    var roleResult = await _userManager.AddToRoleAsync(newUser, "Member");
+                    if (roleResult.Succeeded)
+                    {
+                        return RedirectToAction("AdminPanel");
+                    }
 
-               }
-               else
-               {
-                   foreach (var resultError in result.Errors)
-                   {
-                       ModelState.AddModelError("",resultError.Description);
-                   }
-
-               }
-               
-             
+                    foreach (var resultError in roleResult.Errors)
+                    {
+                        ModelState.AddModelError("", resultError.Description);
+                    }
+                }
+                else
+                {
+                    foreach (var resultError in result.Errors)
+                    {
+                        ModelState.AddModelError("", resultError.Description);
+                    }
+                }
             }
+
             return View();
         }
-    }
 
+        public IActionResult EditRoles()
+        {
+            var roles = _roleManager.Roles.ToList();
+            return View(roles);
+        }
+
+        public IActionResult CreateNewRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewRole(AdminCreateNewRole model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newRole = new AppRole()
+                {
+                    Name = model.Name,
+                    CreatedTime = DateTime.Now,
+                };
+                var result = await _roleManager.CreateAsync(newRole);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("EditRoles");
+                }
+
+                foreach (var resultError in result.Errors)
+                {
+                    ModelState.AddModelError("", resultError.Description);
+                }
+            }
+
+
+            return View();
+        }
+
+      
+        public async Task<IActionResult> DeleteRole(string roleName)
+        {
+            var role = await _roleManager.FindByNameAsync(roleName);
+            if (role != null)
+            {
+                var result = await _roleManager.DeleteAsync(role);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var resultError in result.Errors)
+                    {
+                        ModelState.AddModelError("",resultError.Description);
+                    }
+                }
+                
+            }
+            
+            return RedirectToAction("EditRoles");
+     
+         
+        }
+
+        public IActionResult EditRole(string roleName)
+        {
+          
+            var editedRole = new AdminEditRoleModel()
+            {
+                RoleName= roleName
+            };
+
+            return View(editedRole);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(AdminEditRoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var role = _roleManager.Roles.FirstOrDefault(x => x.Name == model.RoleName);
+                if (role == null)
+                {
+                 ModelState.AddModelError("","Role is not found.");
+                 return RedirectToAction("EditRole", new { roleName = model.RoleName });
+                }
+
+                role.Name = model.ChangeToRoleName;
+                var result = await _roleManager.UpdateAsync(role);
+                if (!result.Succeeded)
+                {
+                    foreach (var resultError in result.Errors)
+                    {
+                        ModelState.AddModelError("",resultError.Description);
+                    }
+                    return RedirectToAction("EditRole");
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "New role name is not valid.";
+                return RedirectToAction("EditRole", new { roleName = model.RoleName });
+            }
+            
+            return RedirectToAction("EditRoles");
+        }
+    }
 }

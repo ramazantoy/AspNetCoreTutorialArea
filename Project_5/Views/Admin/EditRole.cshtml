@@ -1,0 +1,33 @@
+﻿@model Project_5.Models.Admin.AdminEditRoleModel;
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Edit Role</title>
+</head>
+<body>
+<form asp-action="EditRole" method="post">
+    <div>
+        <input type="hidden" asp-for="RoleName" value="@Model.RoleName"/>
+
+        <div class="form-group mb-3">
+            <label asp-for="ChangeToRoleName" class="control-label"></label>
+            <input asp-for="ChangeToRoleName" class="form-control" value="@Model.RoleName"/>
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Save" class="btn btn-primary"/>
+            <a asp-action="EditRoles" asp-controller="Admin" class="btn btn-secondary">Back</a>
+        </div>
+        <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+           @if (ViewBag.ErrorMessage != null)
+            {
+                <t class="text-danger mt-2">*@ViewBag.ErrorMessage</t>
+            }
+    </div>
+</form>
+</body>
+</html>
