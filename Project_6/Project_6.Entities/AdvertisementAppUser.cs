@@ -12,7 +12,7 @@ namespace Project_6.Entities
 
         public int  AdvertisementUserStatusId { get; set; }
 
-        public AdvertisementUserStatus AdvertisementUserStatus  { get; set; }
+        public AdvertisementAppUserStatus AdvertisementAppUserStatus  { get; set; }
         
         public int  MilitaryStatusId { get; set; }
         

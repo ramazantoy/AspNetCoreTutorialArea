@@ -22,7 +22,7 @@ namespace Project_6.DataAccess.Configurations
             builder.HasOne(x => x.AppUser).WithMany(x => x.AdvertisementAppUsers)
                 .HasForeignKey(x => x.AppUserId);
 
-            builder.HasOne(x => x.AdvertisementUserStatus).WithMany(x => x.AdvertisementAppUsers)
+            builder.HasOne(x => x.AdvertisementAppUserStatus).WithMany(x => x.AdvertisementAppUsers)
                 .HasForeignKey(x => x.AdvertisementUserStatusId);
 
             builder.HasOne(x => x.MilitaryStatus).WithMany(x => x.AdvertisementAppUsers)

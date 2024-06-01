@@ -14,7 +14,7 @@ namespace Project_6.DataAccess.Contexts
 
         public DbSet<AdvertisementAppUser> AdvertisementAppUsers { get; set; }
 
-        public DbSet<AdvertisementUserStatus> AdvertisementUserStatus { get; set; }
+        public DbSet<AdvertisementAppUserStatus> AdvertisementUserStatus { get; set; }
 
         public DbSet<AppRole> AppRoles { get; set; }
         
