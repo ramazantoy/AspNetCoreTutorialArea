@@ -51,12 +51,12 @@ namespace Project_6.DataAccess.Repositories
         }
 
 
-        public async Task<T> Find(object id)
+        public async Task<T> FindAsync(object id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
         
-        public async Task<T> GetByFilter(Expression<Func<T,bool>> filter,bool asNoTracking=false)
+        public async Task<T> GetByFilterAsync(Expression<Func<T,bool>> filter,bool asNoTracking=false)
         {
             return !asNoTracking
                 ? await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter)
@@ -73,7 +73,7 @@ namespace Project_6.DataAccess.Repositories
             _context.Set<T>().Remove(entity);
         }
 
-        public async  Task Create(T entity)
+        public async  Task CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
         }
