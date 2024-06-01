@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Project_6.DataAccess.Configurations;
 using Project_6.Entities;
 
 namespace Project_6.DataAccess.Contexts
@@ -8,6 +9,19 @@ namespace Project_6.DataAccess.Contexts
         public AdvertisementContext(DbContextOptions options) : base(options)
         {
             
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AdvertisementAppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AdvertisementAppUserStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new AdvertisementConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new GenderConfiguration());
+            modelBuilder.ApplyConfiguration(new MilitaryStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new ProvidedServiceConfiguration());
         }
 
         public DbSet<Advertisement> Advertisements { get; set; }
