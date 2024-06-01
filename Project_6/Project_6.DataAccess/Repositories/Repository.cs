@@ -62,5 +62,25 @@ namespace Project_6.DataAccess.Repositories
                 ? await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter)
                 : await _context.Set<T>().SingleOrDefaultAsync(filter);
         }
+
+        public IQueryable<T> GetQuery()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
+
+        public void Remove(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public async  Task Create(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+        }
+
+        public void Update(T updatedEntity, T unChangedEntity)
+        {
+            _context.Entry(unChangedEntity).CurrentValues.SetValues(updatedEntity);
+        }
     }
 }
