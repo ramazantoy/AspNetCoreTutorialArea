@@ -49,5 +49,18 @@ namespace Project_6.DataAccess.Repositories
                 ? await _context.Set<T>().Where(filter).AsNoTracking().OrderBy(selector).ToListAsync()
                 : await _context.Set<T>().Where(filter).AsNoTracking().OrderByDescending(selector).ToListAsync();
         }
+
+
+        public async Task<T> Find(object id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+        
+        public async Task<T> GetByFilter(Expression<Func<T,bool>> filter,bool asNoTracking=false)
+        {
+            return !asNoTracking
+                ? await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter)
+                : await _context.Set<T>().SingleOrDefaultAsync(filter);
+        }
     }
 }
