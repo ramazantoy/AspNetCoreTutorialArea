@@ -2,10 +2,9 @@
 
 namespace Project_6.Entities
 {
-    public class AppRole : BaseEntity
+    public class Gender  : BaseEntity
     {
         public string Definition { get; set; }
-        
-        public List<AppUserRole> AppUserRoles { get; set; }
+        public List<AppUser> AppUsers { get; set; }
     }
 }

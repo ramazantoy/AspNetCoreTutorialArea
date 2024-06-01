@@ -10,6 +10,10 @@ namespace Project_6.Entities
         
         public string PhoneNumber { get; set; }
         
-        public List<AppUserRole> UserRoles { get; set; }
+        public int GenderId { get; set; }
+
+        public Gender Gender { get; set; }
+        
+        public List<AppUserRole> AppUserRoles { get; set; }
     }
 }
