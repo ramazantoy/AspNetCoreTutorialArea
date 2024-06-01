@@ -11,7 +11,7 @@ using Project_6.Entities;
 
 namespace Project_6.DataAccess.Repositories
 {
-    public class Repository<T> : IRepository<T> where T:BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly AdvertisementContext _context;
 
@@ -19,24 +19,35 @@ namespace Project_6.DataAccess.Repositories
         {
             _context = context;
         }
-        
+
         //get all
         //order by
         //get all by filter
         //asnotracking()
-       public async Task<List<T>> GetAllAsync()
-       {
-           return await _context.Set<T>().ToListAsync();
-       }
-       
-       public async Task<List<T>> GetAllAsync(Expression<Func<T,bool>> filter)
-       {
-           return await _context.Set<T>().Where(filter).ToListAsync();
-       }
-       
-       public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T,TKey>> selector, OrderByType orderByType=OrderByType.DESC)
-       {
-           return orderByType==OrderByType.ASC ?  await _context.Set<T>().OrderBy(selector).ToListAsync() : await _context.Set<T>().OrderByDescending(selector).ToListAsync();
-       }
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().Where(filter).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, TKey>> selector,
+            OrderByType orderByType = OrderByType.DESC)
+        {
+            return orderByType == OrderByType.ASC
+                ? await _context.Set<T>().AsNoTracking().OrderBy(selector).ToListAsync()
+                : await _context.Set<T>().AsNoTracking().OrderByDescending(selector).ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, bool>> filter,
+            Expression<Func<T, TKey>> selector, OrderByType orderByType = OrderByType.DESC)
+        {
+            return orderByType == OrderByType.ASC
+                ? await _context.Set<T>().Where(filter).AsNoTracking().OrderBy(selector).ToListAsync()
+                : await _context.Set<T>().Where(filter).AsNoTracking().OrderByDescending(selector).ToListAsync();
+        }
     }
 }
