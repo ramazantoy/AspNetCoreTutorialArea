@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using Project_6.Business.Extensions;
 using Project_6.Business.Interfaces;
 using Project_6.Common;
 using Project_6.DataAccess.Interfaces;
@@ -41,7 +42,7 @@ namespace Project_6.Business.Services
                return new Response<TCreateDto>(ResponseType.Succes, dto);
             }
             //foreach for validation erros or using extension
-            return new Response<TCreateDto>(dto, errors:new List<CustomValidationError>());
+            return new Response<TCreateDto>(dto, errors:result.ConvertToCustomValidationError());
         }
 
         public Task<IResponse<TUpdateDto>> UpdateAsync(TUpdateDto updateDto)
