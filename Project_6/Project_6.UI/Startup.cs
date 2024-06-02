@@ -26,6 +26,7 @@ namespace Project_6.UI
         public void ConfigureServices(IServiceCollection services)
         {
           services.AddDependencies(Configuration);
+          services.AddControllersWithViews();
         }
 
     
@@ -40,10 +41,7 @@ namespace Project_6.UI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
