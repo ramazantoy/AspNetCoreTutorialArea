@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Project_6.Business.Mappings.AutoMapper;
 using Project_6.Business.ValidationRules.FluentValidation;
 using Project_6.DataAccess.Contexts;
 using Project_6.DataAccess.Interfaces;
@@ -21,7 +22,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             });
             var mapperConfiguration = new MapperConfiguration(opt =>
             {
-            //  opt.AddProfile();
+                opt.AddProfile(new ProvidedServiceProfile());
             });
 
             var mapper = mapperConfiguration.CreateMapper();
