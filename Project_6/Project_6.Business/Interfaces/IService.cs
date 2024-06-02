@@ -9,7 +9,7 @@ namespace Project_6.Business.Interfaces
 {
     public interface IService<TCreateDto, TUpdateDto, TListDto, T>
         where TCreateDto : class, IDto, new()
-        where TUpdateDto : class, IDto, new()
+        where TUpdateDto : class, IUpdateDto, new()
         where TListDto : class, IDto, new()
         where T : BaseEntity
     {
