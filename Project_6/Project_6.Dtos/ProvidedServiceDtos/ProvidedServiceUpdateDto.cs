@@ -11,7 +11,6 @@ namespace Project_6.Dtos.ProvidedServiceDtos
         public string ImagePath { get; set; }
 
         public string Description { get; set; }
-
-        public DateTime CreatedTime { get; set; }
+        
     }
 }
