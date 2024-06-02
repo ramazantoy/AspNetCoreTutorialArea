@@ -3,7 +3,9 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Project_6.Business.Interfaces;
 using Project_6.Business.Mappings.AutoMapper;
+using Project_6.Business.Services;
 using Project_6.Business.ValidationRules.FluentValidation;
 using Project_6.DataAccess.Contexts;
 using Project_6.DataAccess.Interfaces;
@@ -31,6 +33,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             
             services.AddTransient<IValidator<ProvidedServiceCreateDto>, ProvidedServiceCreateDtoValidator>();
             services.AddTransient<IValidator<ProvidedServiceUpdateDto>, ProvidedServiceUpdateDtoValidator>();
+            services.AddScoped<IProvidedServiceManager, ProvidedServiceManager>();
         }
     }
 }
