@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_6.DataAccess", "Pro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_6.Business", "Project_6.Business\Project_6.Business.csproj", "{B76EA218-1CC7-478D-A9B0-847F056A0A2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_6.UI", "Project_6.UI\Project_6.UI.csproj", "{7DE3087F-E3E4-47E2-9310-6F3790A3B5AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_6.UI", "Project_6.UI\Project_6.UI.csproj", "{7DE3087F-E3E4-47E2-9310-6F3790A3B5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_6.Dtos", "Project_6.Dtos\Project_6.Dtos.csproj", "{77E6593F-5998-457A-8801-CE89DF616D08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7DE3087F-E3E4-47E2-9310-6F3790A3B5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE3087F-E3E4-47E2-9310-6F3790A3B5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE3087F-E3E4-47E2-9310-6F3790A3B5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E6593F-5998-457A-8801-CE89DF616D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E6593F-5998-457A-8801-CE89DF616D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E6593F-5998-457A-8801-CE89DF616D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E6593F-5998-457A-8801-CE89DF616D08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
