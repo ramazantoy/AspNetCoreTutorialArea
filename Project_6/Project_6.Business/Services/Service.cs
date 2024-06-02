@@ -33,33 +33,47 @@ namespace Project_6.Business.Services
             //valid ? 
             //_uow.getRepo<>.create(_mapper(entity))
             //response<T> dto
-            var result = _createDtoValidator.Validate(dto);
-
-            if (result.IsValid)
-            {
-                var createdEntity = _mapper.Map<T>(dto);
-               await _uow.GetRepository<T>().CreateAsync(createdEntity);
-               return new Response<TCreateDto>(ResponseType.Succes, dto);
-            }
-            //foreach for validation erros or using extension
-            return new Response<TCreateDto>(dto, errors:result.ConvertToCustomValidationError());
+            var result = await _createDtoValidator.ValidateAsync(dto);
+            
+            //foreach for validation errors or using extension
+            if (!result.IsValid) return new Response<TCreateDto>(dto, errors: result.ConvertToCustomValidationError());
+            
+            var createdEntity = _mapper.Map<T>(dto);
+            await _uow.GetRepository<T>().CreateAsync(createdEntity);
+            return new Response<TCreateDto>(ResponseType.Succes, dto);
+        
         }
 
         public Task<IResponse<TUpdateDto>> UpdateAsync(TUpdateDto updateDto)
         {
+            _uow.GetRepository<T>().Update();
         }
 
-        public Task<IResponse<IDto>> GetByIdAsync(int id)
+        public async Task<IResponse<IDto>> GetByIdAsync(int id)
         {
+            var data = await _uow.GetRepository<T>().GetByFilterAsync(x => x.Id == id);
+            if (data == null) return new Response<IDto>(ResponseType.NotFound, "data is not found by id");
+
+            var dto = _mapper.Map<IDto>(data);
+            return new Response<IDto>(ResponseType.Succes, dto);
         }
 
-        public Task<IResponse> RemoveAsync(int id)
+        public async Task<IResponse> RemoveAsync(int id)
         {
-            ;
+            var data = await _uow.GetRepository<T>().GetByFilterAsync(x => x.Id == id);
+            if (data == null) return new Response<IDto>(ResponseType.NotFound, "data is not found by id");
+            
+            _uow.GetRepository<T>().Remove(data);
+
+            return new Response(ResponseType.Succes);
+
         }
 
-        public Task<IResponse<List<TListDto>>> GetAllAsync()
+        public async Task<IResponse<List<TListDto>>> GetAllAsync()
         {
+            var data = await _uow.GetRepository<T>().GetAllAsync();
+            var dto = _mapper.Map<List<TListDto>>(data);
+            return new Response<List<TListDto>>(ResponseType.Succes, dto);
         }
     }
 }
