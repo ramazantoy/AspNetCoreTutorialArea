@@ -33,7 +33,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             });
 
             #endregion
-           
+
 
             var mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
@@ -52,7 +52,13 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             #endregion
 
 
+            #region Services
+
             services.AddScoped<IProvidedServiceManager, ProvidedServiceManager>();
+
+            services.AddScoped<IAdvertisementService, AdvertisementService>();
+
+            #endregion
         }
     }
 }
