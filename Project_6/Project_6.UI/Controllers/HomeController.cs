@@ -20,5 +20,10 @@ namespace Project_6.UI.Controllers
 
          return this.ResponseView(response);
         }
+
+        public IActionResult OpeningPositions()
+        {
+            return View();
+        }
     }
 }
