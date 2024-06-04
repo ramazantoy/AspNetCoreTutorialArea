@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project_6.Business.Interfaces;
+using Project_6.UI.Extensions;
 
 namespace Project_6.UI.Controllers
 {
@@ -16,8 +17,8 @@ namespace Project_6.UI.Controllers
         public async Task<IActionResult> Index()
         {
          var response=  await _providedServiceManager.GetAllAsync();
-         
-            return View();
+
+         return this.ResponseView(response);
         }
     }
 }
