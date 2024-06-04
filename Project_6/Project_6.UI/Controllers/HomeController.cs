@@ -8,10 +8,12 @@ namespace Project_6.UI.Controllers
     public class HomeController : Controller
     {
         private readonly IProvidedServiceManager _providedServiceManager;
+        private readonly IAdvertisementService _advertisementService;
 
-        public HomeController(IProvidedServiceManager providedServiceManager)
+        public HomeController(IProvidedServiceManager providedServiceManager, IAdvertisementService advertisementService)
         {
             _providedServiceManager = providedServiceManager;
+            _advertisementService = advertisementService;
         }
 
         public async Task<IActionResult> Index()
@@ -21,9 +23,10 @@ namespace Project_6.UI.Controllers
          return this.ResponseView(response);
         }
 
-        public IActionResult OpeningPositions()
+        public async Task<IActionResult> OpeningPositions()
         {
-            return View();
+            var response = await _advertisementService.GetActivesAsync();
+            return this.ResponseView(response);
         }
     }
 }
