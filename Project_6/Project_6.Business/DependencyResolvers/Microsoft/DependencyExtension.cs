@@ -23,7 +23,17 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             {
                 opt.UseSqlServer(configuration.GetConnectionString("Local"));
             });
-            var mapperConfiguration = new MapperConfiguration(opt => { opt.AddProfile(new ProvidedServiceProfile()); });
+
+            #region Mappers
+
+            var mapperConfiguration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile(new ProvidedServiceProfile());
+                opt.AddProfile(new AdvertisementProfile());
+            });
+
+            #endregion
+           
 
             var mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
