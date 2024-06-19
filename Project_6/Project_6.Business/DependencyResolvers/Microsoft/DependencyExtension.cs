@@ -63,6 +63,8 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
 
             services.AddScoped<IAdvertisementService, AdvertisementService>();
 
+            services.AddScoped<IAppUserService, AppUserService>();
+
             #endregion
         }
     }
