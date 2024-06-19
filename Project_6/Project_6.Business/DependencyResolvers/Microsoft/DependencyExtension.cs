@@ -11,6 +11,7 @@ using Project_6.DataAccess.Contexts;
 using Project_6.DataAccess.Interfaces;
 using Project_6.DataAccess.UnitOfWork;
 using Project_6.Dtos.AdvertisementDtos;
+using Project_6.Dtos.AppUserDtos;
 using Project_6.Dtos.ProvidedServiceDtos;
 
 namespace Project_6.Business.DependencyResolvers.Microsoft
@@ -30,6 +31,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             {
                 opt.AddProfile(new ProvidedServiceProfile());
                 opt.AddProfile(new AdvertisementProfile());
+                opt.AddProfile(new AppUserProfile());
             });
 
             #endregion
@@ -48,6 +50,9 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
 
             services.AddTransient<IValidator<AdvertisementCreateDto>, AdvertisementCreateDtoValidator>();
             services.AddTransient<IValidator<AdvertisementUpdateDto>, AdvertisementUpdateDtoValidator>();
+
+            services.AddTransient<IValidator<AppUserCreateDto>, AppUserCreateDtoValidator>();
+            services.AddTransient<IValidator<AppUserUpdateDto>, AppUserUpdateDtoValidator>();
 
             #endregion
 
