@@ -27,5 +27,10 @@ namespace Project_6.UI.Controllers
             
             return View(new UserCreateModel());
         }
+        [HttpPost]
+        public async Task<IActionResult> SignUp(UserCreateModel model)
+        {
+            return View();
+        }
     }
 }
