@@ -33,6 +33,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
                 opt.AddProfile(new ProvidedServiceProfile());
                 opt.AddProfile(new AdvertisementProfile());
                 opt.AddProfile(new AppUserProfile());
+                opt.AddProfile(new GenderProfile());
             });
 
             #endregion
@@ -68,6 +69,8 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
             services.AddScoped<IAdvertisementService, AdvertisementService>();
 
             services.AddScoped<IAppUserService, AppUserService>();
+
+            services.AddScoped<IGenderService, GenderService>();
 
             #endregion
         }
