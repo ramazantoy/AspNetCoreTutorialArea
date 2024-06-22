@@ -12,6 +12,7 @@ using Project_6.DataAccess.Interfaces;
 using Project_6.DataAccess.UnitOfWork;
 using Project_6.Dtos.AdvertisementDtos;
 using Project_6.Dtos.AppUserDtos;
+using Project_6.Dtos.GenderDtos;
 using Project_6.Dtos.ProvidedServiceDtos;
 
 namespace Project_6.Business.DependencyResolvers.Microsoft
@@ -53,6 +54,9 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
 
             services.AddTransient<IValidator<AppUserCreateDto>, AppUserCreateDtoValidator>();
             services.AddTransient<IValidator<AppUserUpdateDto>, AppUserUpdateDtoValidator>();
+
+            services.AddTransient<IValidator<GenderUpdateDto>, GenderUpdateDtoValidator>();
+            services.AddTransient<IValidator<GenderCreateDto>, GenderCreateDtoValidator>();
 
             #endregion
 
