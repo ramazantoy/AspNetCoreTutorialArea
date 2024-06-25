@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project_6.Business.Interfaces;
@@ -14,10 +15,12 @@ namespace Project_6.UI.Controllers
     public class AccountController : Controller
     {
         private readonly IGenderService _genderService;
+        private readonly IValidator<UserCreateModel> _userCreateModelValidator;
 
-        public AccountController(IGenderService genderService)
+        public AccountController(IGenderService genderService, IValidator<UserCreateModel> userCreateModelValidator)
         {
             _genderService = genderService;
+            _userCreateModelValidator = userCreateModelValidator;
         }
 
         // GET
@@ -39,7 +42,19 @@ namespace Project_6.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(UserCreateModel model)
         {
+            var validateResult = await _userCreateModelValidator.ValidateAsync(model);
+
+            if (validateResult.IsValid)
+            {
+                return View(model);
+            }
+            
+            foreach (var validateResultError in validateResult.Errors)
+            {
+                ModelState.AddModelError(validateResultError.PropertyName,validateResultError.ErrorMessage);
+            }
             return View(model);
+ 
         }
     }
 }
