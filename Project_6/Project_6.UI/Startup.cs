@@ -7,8 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Project_6.Business.DependencyResolvers.Microsoft;
+using Project_6.UI.Models;
+using Project_6.UI.ValidationRules;
 
 namespace Project_6.UI
 {
@@ -27,6 +30,7 @@ namespace Project_6.UI
         {
           services.AddDependencies(Configuration);
           services.AddControllersWithViews();
+          services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
         }
 
     
