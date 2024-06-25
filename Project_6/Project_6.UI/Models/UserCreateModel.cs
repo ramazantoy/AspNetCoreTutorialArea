@@ -19,6 +19,6 @@ namespace Project_6.UI.Models
         
         public int GenderId { get; set; }
 
-        public SelectList Genders { get; set; }
+        public List<SelectListItem> Genders { get; set; }
     }
 }

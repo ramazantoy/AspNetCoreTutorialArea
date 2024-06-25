@@ -1,7 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project_6.Business.Interfaces;
+using Project_6.Dtos.GenderDtos;
+using Project_6.Entities;
 using Project_6.UI.Models;
 
 namespace Project_6.UI.Controllers
@@ -20,12 +25,16 @@ namespace Project_6.UI.Controllers
         {
             var response = await _genderService.GetAllAsync();
             
-            var userCreateModel = new UserCreateModel
+            var genders = response.Data.Select(g => new SelectListItem
             {
-                Genders = new SelectList(response.Data)
+                Value = g.Id.ToString(),
+                Text = g.Definition
+            }).ToList();
+            var model = new UserCreateModel
+            {
+                Genders = genders
             };
-            
-            return View(new UserCreateModel());
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> SignUp(UserCreateModel model)
