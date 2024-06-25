@@ -39,7 +39,7 @@ namespace Project_6.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(UserCreateModel model)
         {
-            return View();
+            return View(model);
         }
     }
 }
