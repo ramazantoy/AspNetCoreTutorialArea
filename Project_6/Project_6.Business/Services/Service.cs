@@ -44,6 +44,7 @@ namespace Project_6.Business.Services
 
             var createdEntity = _mapper.Map<T>(dto);
             await _uow.GetRepository<T>().CreateAsync(createdEntity);
+            await _uow.SaveChanges();
             return new Response<TCreateDto>(ResponseType.Succes, dto);
         }
 
@@ -62,6 +63,7 @@ namespace Project_6.Business.Services
 
             var entity = _mapper.Map<T>(dto);
             _uow.GetRepository<T>().Update(entity,unChangedData);
+            await _uow.SaveChanges();
 
             return new Response<TUpdateDto>(ResponseType.Succes, dto);
 
@@ -82,6 +84,7 @@ namespace Project_6.Business.Services
             if (data == null) return new Response<IDto>(ResponseType.NotFound, "data is not found by id");
 
             _uow.GetRepository<T>().Remove(data);
+            await _uow.SaveChanges();
 
             return new Response(ResponseType.Succes);
         }
