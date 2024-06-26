@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Project_6.Business.DependencyResolvers.Microsoft;
+using Project_6.Business.Helpers;
+using Project_6.UI.Mappings.AutoMapper;
 using Project_6.UI.Models;
 using Project_6.UI.ValidationRules;
 
@@ -31,6 +29,18 @@ namespace Project_6.UI
           services.AddDependencies(Configuration);
           services.AddControllersWithViews();
           services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
+
+          var profiles = ProfileHelper.GetMapperProfiles();
+
+          profiles.Add(new UserCreateModelProfile());
+
+          var configuration = new MapperConfiguration(opt =>
+          {
+              opt.AddProfiles(profiles);
+          });
+
+          var mapper = configuration.CreateMapper();
+          services.AddSingleton(mapper);
         }
 
     

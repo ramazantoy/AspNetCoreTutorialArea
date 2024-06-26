@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,21 +27,7 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
                 opt.UseSqlServer(configuration.GetConnectionString("Local"));
             });
 
-            #region Mappers
-
-            var mapperConfiguration = new MapperConfiguration(opt =>
-            {
-                opt.AddProfile(new ProvidedServiceProfile());
-                opt.AddProfile(new AdvertisementProfile());
-                opt.AddProfile(new AppUserProfile());
-                opt.AddProfile(new GenderProfile());
-            });
-
-            #endregion
-
-
-            var mapper = mapperConfiguration.CreateMapper();
-            services.AddSingleton(mapper);
+       
             services.AddScoped<IUow, Uow>();
 
             /*Validators*/
@@ -74,5 +61,8 @@ namespace Project_6.Business.DependencyResolvers.Microsoft
 
             #endregion
         }
+        
+   
     }
+   
 }
