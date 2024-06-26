@@ -16,11 +16,13 @@ namespace Project_6.UI.Controllers
     {
         private readonly IGenderService _genderService;
         private readonly IValidator<UserCreateModel> _userCreateModelValidator;
+        private readonly IAppUserService _appUserService;
 
-        public AccountController(IGenderService genderService, IValidator<UserCreateModel> userCreateModelValidator)
+        public AccountController(IGenderService genderService, IValidator<UserCreateModel> userCreateModelValidator, IAppUserService appUserService)
         {
             _genderService = genderService;
             _userCreateModelValidator = userCreateModelValidator;
+            _appUserService = appUserService;
         }
 
         // GET
@@ -46,6 +48,7 @@ namespace Project_6.UI.Controllers
 
             if (validateResult.IsValid)
             {
+              //  _appUserService.CreateAsync()
                 return View(model);
             }
             
