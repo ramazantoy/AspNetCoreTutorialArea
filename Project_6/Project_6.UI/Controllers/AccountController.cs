@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project_6.Business.Interfaces;
-using Project_6.Dtos.GenderDtos;
-using Project_6.Entities;
 using Project_6.UI.Models;
 
 namespace Project_6.UI.Controllers
@@ -17,12 +14,14 @@ namespace Project_6.UI.Controllers
         private readonly IGenderService _genderService;
         private readonly IValidator<UserCreateModel> _userCreateModelValidator;
         private readonly IAppUserService _appUserService;
+        private readonly IMapper _mapper;
 
-        public AccountController(IGenderService genderService, IValidator<UserCreateModel> userCreateModelValidator, IAppUserService appUserService)
+        public AccountController(IGenderService genderService, IValidator<UserCreateModel> userCreateModelValidator, IAppUserService appUserService, IMapper mapper)
         {
             _genderService = genderService;
             _userCreateModelValidator = userCreateModelValidator;
             _appUserService = appUserService;
+            _mapper = mapper;
         }
 
         // GET
