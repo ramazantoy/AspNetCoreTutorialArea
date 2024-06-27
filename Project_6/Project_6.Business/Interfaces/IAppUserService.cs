@@ -8,5 +8,6 @@ namespace Project_6.Business.Interfaces
     public interface IAppUserService : IService<AppUserCreateDto,AppUserUpdateDto,AppUserListDto,AppUser>
     {
         Task<IResponse<AppUserCreateDto>> CreateWithRoleAsync(AppUserCreateDto createDto, int roleId);
+        Task<IResponse<AppUserListDto>> CheckUserAsync(AppUserLoginDto appUserLoginDto);
     }
 }

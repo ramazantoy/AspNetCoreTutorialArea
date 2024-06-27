@@ -16,23 +16,27 @@ namespace Project_6.Business.Services
         private readonly IMapper _mapper;
         private readonly IUow _uow;
         private readonly IValidator<AppUserCreateDto> _createValidator;
+        private readonly IValidator<AppUserLoginDto> _loginValidator;
 
         public AppUserService(IMapper mapper, IValidator<AppUserCreateDto> createDtoValidator,
-            IValidator<AppUserUpdateDto> updateDtoValidator, IUow uow, IValidator<AppUserCreateDto> createValidator)
+            IValidator<AppUserUpdateDto> updateDtoValidator, IUow uow, IValidator<AppUserCreateDto> createValidator,
+            IValidator<AppUserLoginDto> loginValidator)
             : base(mapper, createDtoValidator, updateDtoValidator, uow)
         {
             _mapper = mapper;
             _uow = uow;
             _createValidator = createValidator;
+            _loginValidator = loginValidator;
         }
 
-        public async Task<IResponse<AppUserCreateDto>> CreateWithRoleAsync(AppUserCreateDto createDto,int roleId)
+        public async Task<IResponse<AppUserCreateDto>> CreateWithRoleAsync(AppUserCreateDto createDto, int roleId)
         {
             var validationResult = await _createValidator.ValidateAsync(createDto);
-            
-            if (!validationResult.IsValid) return new Response<AppUserCreateDto>(createDto, validationResult.ConvertToCustomValidationError());
-           
-            
+
+            if (!validationResult.IsValid)
+                return new Response<AppUserCreateDto>(createDto, validationResult.ConvertToCustomValidationError());
+
+
             var mappedUser = _mapper.Map<AppUser>(createDto);
             mappedUser.AppUserRoles = new List<AppUserRole>
             {
@@ -46,7 +50,26 @@ namespace Project_6.Business.Services
 
             await _uow.SaveChanges();
             return new Response<AppUserCreateDto>(ResponseType.Succes, createDto);
+        }
 
+        public async Task<IResponse<AppUserListDto>> CheckUserAsync(AppUserLoginDto appUserLoginDto)
+        {
+            var validationResult = await _loginValidator.ValidateAsync(appUserLoginDto);
+
+            if (!validationResult.IsValid)
+                return new Response<AppUserListDto>(ResponseType.ValidationError,
+                    "Username or password is must not empty. ");
+
+
+            var user = await _uow.GetRepository<AppUser>().GetByFilterAsync(x =>
+                x.UserName == appUserLoginDto.UserName && x.Password == appUserLoginDto.Password);
+
+            if (user == null)
+                return new Response<AppUserListDto>(ResponseType.NotFound, "Username or password not correct");
+
+            var appUserDto = _mapper.Map<AppUserListDto>(user);
+
+            return new Response<AppUserListDto>(ResponseType.Succes, appUserDto);
         }
     }
 }
