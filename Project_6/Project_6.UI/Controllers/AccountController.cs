@@ -26,8 +26,6 @@ namespace Project_6.UI.Controllers
             _appUserService = appUserService;
             _mapper = mapper;
         }
-
-        // GET
         public async Task<IActionResult> SignUp()
         {
             var response = await _genderService.GetAllAsync();
@@ -62,6 +60,11 @@ namespace Project_6.UI.Controllers
             }
             return View(model);
  
+        }
+
+        public IActionResult SignIn()
+        {
+            return View();
         }
     }
 }
