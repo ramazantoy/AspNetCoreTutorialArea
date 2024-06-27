@@ -40,6 +40,9 @@ namespace Project_6.UI
                   opt.Cookie.SameSite = SameSiteMode.Strict;
                   opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                   opt.Cookie.Expiration=TimeSpan.FromDays(20);
+                  opt.LoginPath = new PathString("Account/SignIn");
+                  opt.LogoutPath = new PathString("Account/SignOut");
+                  opt.AccessDeniedPath = new PathString("Account/AccessDenied");
               });
           
           services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
