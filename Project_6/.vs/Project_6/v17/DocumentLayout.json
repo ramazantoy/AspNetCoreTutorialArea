@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\DEM\u0130RBA\u011E\\Documents\\GitHub\\AspNetCoreTutorialArea\\Project_6\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BDB13ACD-9AC0-46B0-BC23-0ABAF2964143}|Project_6.DataAccess\\Project_6.DataAccess.csproj|c:\\users\\dem\u0130rba\u011F\\documents\\github\\aspnetcoretutorialarea\\project_6\\project_6.dataaccess\\migrations\\20240627153758_approledataadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB13ACD-9AC0-46B0-BC23-0ABAF2964143}|Project_6.DataAccess\\Project_6.DataAccess.csproj|solutionrelative:project_6.dataaccess\\migrations\\20240627153758_approledataadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BDB13ACD-9AC0-46B0-BC23-0ABAF2964143}|Project_6.DataAccess\\Project_6.DataAccess.csproj|c:\\users\\dem\u0130rba\u011F\\documents\\github\\aspnetcoretutorialarea\\project_6\\project_6.dataaccess\\migrations\\20240615221608_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BDB13ACD-9AC0-46B0-BC23-0ABAF2964143}|Project_6.DataAccess\\Project_6.DataAccess.csproj|solutionrelative:project_6.dataaccess\\migrations\\20240615221608_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,6 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20240627153758_AppRoleDataAdded.cs",
+              "DocumentMoniker": "C:\\Users\\DEM\u0130RBA\u011E\\Documents\\GitHub\\AspNetCoreTutorialArea\\Project_6\\Project_6.DataAccess\\Migrations\\20240627153758_AppRoleDataAdded.cs",
+              "RelativeDocumentMoniker": "Project_6.DataAccess\\Migrations\\20240627153758_AppRoleDataAdded.cs",
+              "ToolTip": "C:\\Users\\DEM\u0130RBA\u011E\\Documents\\GitHub\\AspNetCoreTutorialArea\\Project_6\\Project_6.DataAccess\\Migrations\\20240627153758_AppRoleDataAdded.cs",
+              "RelativeToolTip": "Project_6.DataAccess\\Migrations\\20240627153758_AppRoleDataAdded.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T15:37:59.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "20240615221608_test.cs",
               "DocumentMoniker": "C:\\Users\\DEM\u0130RBA\u011E\\Documents\\GitHub\\AspNetCoreTutorialArea\\Project_6\\Project_6.DataAccess\\Migrations\\20240615221608_test.cs",
               "RelativeDocumentMoniker": "Project_6.DataAccess\\Migrations\\20240615221608_test.cs",
@@ -35,7 +52,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Response{T}.cs",
               "DocumentMoniker": "C:\\Users\\DEM\u0130RBA\u011E\\Documents\\GitHub\\AspNetCoreTutorialArea\\Project_6\\Project_6.Common\\Response{T}.cs",
               "RelativeDocumentMoniker": "Project_6.Common\\Response{T}.cs",
@@ -43,8 +60,7 @@
               "RelativeToolTip": "Project_6.Common\\Response{T}.cs",
               "ViewState": "AQIAAAcAAAAAAAAAAAAgwBkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T22:10:28.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-15T22:10:28.397Z"
             }
           ]
         }
