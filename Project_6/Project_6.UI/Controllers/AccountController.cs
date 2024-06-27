@@ -5,6 +5,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project_6.Business.Interfaces;
+using Project_6.Common.Enums;
 using Project_6.Dtos.AppUserDtos;
 using Project_6.UI.Extensions;
 using Project_6.UI.Models;
@@ -50,7 +51,7 @@ namespace Project_6.UI.Controllers
             if (validateResult.IsValid)
             {
                 var dto =  _mapper.Map<AppUserCreateDto>(model);
-               var createResponse= await _appUserService.CreateWithRoleAsync(dto,2);
+               var createResponse= await _appUserService.CreateWithRoleAsync(dto,(int)RoleType.Member);
                return this.ResponseRedirectToAction(createResponse, "SignIn");
                 // return View(model);
             }
