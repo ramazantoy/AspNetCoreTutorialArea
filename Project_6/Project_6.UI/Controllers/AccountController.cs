@@ -1,10 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project_6.Business.Interfaces;
+using Project_6.Common;
 using Project_6.Common.Enums;
 using Project_6.Dtos.AppUserDtos;
 using Project_6.UI.Extensions;
@@ -68,9 +73,32 @@ namespace Project_6.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignIn(AppUserLoginDto model)
+        public async Task<IActionResult> SignIn(AppUserLoginDto model)
         {
-            return View();
+         var result=await  _appUserService.CheckUserAsync(model);
+
+         if (result.ResponseType == ResponseType.Succes)
+         {
+             var claims = new List<Claim>
+             {
+             };
+
+             var claimsIdentity = new ClaimsIdentity(
+                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+             var authProperties = new AuthenticationProperties
+             {
+                 IsPersistent = model.RememberMe,
+             };
+
+             await HttpContext.SignInAsync(
+                 CookieAuthenticationDefaults.AuthenticationScheme, 
+                 new ClaimsPrincipal(claimsIdentity), 
+                 authProperties);
+         }
+         
+         ModelState.AddModelError("",result.Message);
+         return View(model);
         }
     }
 }
