@@ -66,5 +66,11 @@ namespace Project_6.UI.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult SignIn(AppUserLoginDto model)
+        {
+            return View();
+        }
     }
 }
