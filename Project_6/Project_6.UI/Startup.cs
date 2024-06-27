@@ -1,9 +1,12 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Project_6.Business.DependencyResolvers.Microsoft;
 using Project_6.Business.Helpers;
@@ -28,6 +31,17 @@ namespace Project_6.UI
         {
           services.AddDependencies(Configuration);
           services.AddControllersWithViews();
+          
+          services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(opt =>
+              {
+                  opt.Cookie.Name = "Project_6.Cookie";
+                  opt.Cookie.HttpOnly = true;
+                  opt.Cookie.SameSite = SameSiteMode.Strict;
+                  opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                  opt.Cookie.Expiration=TimeSpan.FromDays(20);
+              });
+          
           services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
 
           var profiles = ProfileHelper.GetMapperProfiles();
@@ -54,6 +68,9 @@ namespace Project_6.UI
             app.UseStaticFiles();
             
             app.UseRouting();
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
