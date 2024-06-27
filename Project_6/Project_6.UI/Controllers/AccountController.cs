@@ -50,7 +50,7 @@ namespace Project_6.UI.Controllers
             if (validateResult.IsValid)
             {
                 var dto =  _mapper.Map<AppUserCreateDto>(model);
-               var createResponse= await _appUserService.CreateAsync(dto);
+               var createResponse= await _appUserService.CreateWithRoleAsync(dto,2);
                return this.ResponseRedirectToAction(createResponse, "SignIn");
                 // return View(model);
             }
