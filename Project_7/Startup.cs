@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Project_7.Data;
+using Project_7.Interfaces;
+using Project_7.Repositories;
 
 namespace Project_7
 {
@@ -31,6 +33,8 @@ namespace Project_7
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Local"));
             });
+
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
