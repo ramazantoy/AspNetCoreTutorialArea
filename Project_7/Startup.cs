@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Project_7.Data;
 
 namespace Project_7
 {
@@ -25,7 +27,10 @@ namespace Project_7
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<ProductContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("Local"));
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
