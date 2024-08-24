@@ -9,5 +9,8 @@ namespace Project_7.Interfaces
         public Task<List<Product>> GetAllAsync();
 
         public Task<Product> GetProductById(int id);
+
+        public Task<Product> CreateAsync(Product product);
+
     }
 }

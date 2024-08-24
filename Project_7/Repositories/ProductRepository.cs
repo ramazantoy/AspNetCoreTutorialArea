@@ -25,5 +25,12 @@ namespace Project_7.Repositories
         {
             return await _productContext.Products.SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<Product> CreateAsync(Product product)
+        {
+            await _productContext.AddAsync(product);
+            await _productContext.SaveChangesAsync();
+            return product;
+        }
     }
 }

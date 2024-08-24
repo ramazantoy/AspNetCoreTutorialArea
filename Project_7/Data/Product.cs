@@ -8,7 +8,7 @@ namespace Project_7.Data
         public int  Stock { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }=DateTime.Now;
         public string ImagePath { get; set; }
     }
 }

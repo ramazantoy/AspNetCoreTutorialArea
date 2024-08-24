@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project_7.Data;
@@ -56,6 +57,13 @@ namespace Project_7.Controllers
 
             return Ok(data);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product)
+        {
+            var addedProduct =await _productRepository.CreateAsync(product);
+            return Created(String.Empty, product);
         }
     }
 }
