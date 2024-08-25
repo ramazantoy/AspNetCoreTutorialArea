@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Project_7.Data;
 using Project_7.Interfaces;
 using Project_7.Repositories;
@@ -42,7 +43,9 @@ namespace Project_7
                     opt.AllowAnyOrigin().AllowAnyMethod();
                 });
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Project_7", Version = "v1" });
