@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_7.Data;
@@ -9,6 +10,7 @@ using Project_7.Interfaces;
 
 namespace Project_7.Controllers
 {
+    [EnableCors]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase

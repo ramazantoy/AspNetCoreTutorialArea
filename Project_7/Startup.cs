@@ -35,6 +35,13 @@ namespace Project_7
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddCors(cors =>
+            {
+                cors.AddPolicy("Project_7Policy", opt =>
+                {
+                    opt.AllowAnyOrigin().AllowAnyMethod();
+                });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,6 +61,7 @@ namespace Project_7
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseCors("Project_7Policy");
 
             app.UseAuthorization();
 
