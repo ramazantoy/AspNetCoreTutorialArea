@@ -12,5 +12,9 @@ namespace Project_7.Interfaces
 
         public Task<Product> CreateAsync(Product product);
 
+        public Task UpdateAsync(Product product);
+
+        public Task RemoveAsync(int id);
+
     }
 }

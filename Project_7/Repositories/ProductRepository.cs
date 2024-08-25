@@ -23,7 +23,7 @@ namespace Project_7.Repositories
 
         public async Task<Product> GetProductById(int id)
         {
-            return await _productContext.Products.SingleOrDefaultAsync(x => x.Id == id);
+            return await _productContext.Products.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Product> CreateAsync(Product product)
@@ -31,6 +31,22 @@ namespace Project_7.Repositories
             await _productContext.AddAsync(product);
             await _productContext.SaveChangesAsync();
             return product;
+        }
+
+        public async Task UpdateAsync(Product product)
+        {
+
+            var unchangedEntity =await _productContext.Products.FindAsync(product.Id);
+            _productContext.Entry(unchangedEntity).CurrentValues.SetValues(product);
+            await _productContext.SaveChangesAsync();
+
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            var removedEntity = await _productContext.Products.FindAsync(id);
+            _productContext.Products.Remove(removedEntity);
+         await   _productContext.SaveChangesAsync();
         }
     }
 }

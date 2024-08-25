@@ -65,5 +65,33 @@ namespace Project_7.Controllers
             var addedProduct =await _productRepository.CreateAsync(product);
             return Created(String.Empty, product);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Product product)
+        {
+            var checkProduct = _productRepository.GetProductById(product.Id);
+            if (checkProduct == null)
+            {
+                return NotFound(product.Id);
+            }
+
+            await _productRepository.UpdateAsync(product);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var checkProduct = _productRepository.GetProductById(id);
+            if (checkProduct == null)
+            {
+                return NotFound(id);
+            }
+
+            await _productRepository.RemoveAsync(id);
+
+            return NoContent();
+        }
     }
 }
