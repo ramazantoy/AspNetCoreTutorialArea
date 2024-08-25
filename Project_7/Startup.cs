@@ -52,6 +52,7 @@ namespace Project_7
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Project_7 v1"));
             }
 
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();
