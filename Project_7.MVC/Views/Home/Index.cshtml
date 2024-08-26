@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Project_7.MVC.ResponseModels.ProductResponseModel>
 
 <!DOCTYPE html>
 
@@ -8,5 +8,26 @@
 </head>
 <body>
 <p>Mvc Works</p>
+<p>@ViewBag.ResponseMessage</p>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Created Date</th>
+        <th>Image Path</th>
+    </tr>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>@item.Stock</td>
+            <td>@item.CreatedDate</td>
+            <td>@item.ImagePath</td>
+
+        </tr>
+    }
+</table>
 </body>
 </html>
