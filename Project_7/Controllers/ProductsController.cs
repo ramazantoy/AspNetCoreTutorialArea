@@ -98,8 +98,9 @@ namespace Project_7.Controllers
             return NoContent();
         }
 
+        //api/products/upload
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload(IFormFile formFile)
+        public async Task<IActionResult> Upload([FromForm]IFormFile formFile)
         {
             var newName = Guid.NewGuid() + "." + Path.GetExtension(formFile.FileName);
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newName);
