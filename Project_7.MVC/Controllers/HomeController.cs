@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -28,6 +29,29 @@ namespace Project_7.MVC.Controllers
             var result = JsonConvert.DeserializeObject<List<ProductResponseModel>>(jsonData);
             return View(result);
 
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductResponseModel model)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(model);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("http://localhost:5000/api/products", content);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["errorMessage"] = $"Error: {(int)responseMessage.StatusCode}";
+                return View(model);
+            }
         }
     }
 }
