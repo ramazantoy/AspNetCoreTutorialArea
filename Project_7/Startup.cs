@@ -9,8 +9,11 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Project_7.Data;
 using Project_7.Interfaces;
@@ -30,6 +33,18 @@ namespace Project_7
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.RequireHttpsMetadata = false; //for http
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "http://localhost",
+                    ValidAudience = "http://localhost",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("afoolasfallen258")),
+                    ValidateIssuerSigningKey = true,
+                };
+
+            });
             services.AddDbContext<ProductContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Local"));
