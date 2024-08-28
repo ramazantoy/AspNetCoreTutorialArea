@@ -18,21 +18,25 @@
         <th>Created Date</th>
         <th>Image Path</th>
     </tr>
-    @foreach (var item in @Model)
+    @if (@Model != null)
     {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
-            <td>@item.Stock</td>
-            <td>@item.CreatedDate</td>
-            <td>@item.ImagePath</td>
-            <td>
-                <a asp-action="Update" asp-controller="Home" asp-route-id="@item.Id">Update</a>
-                <a asp-action="Remove" asp-controller="Home" asp-route-id="@item.Id">Remove</a>
-            </td>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td>@item.CreatedDate</td>
+                <td>@item.ImagePath</td>
+                <td>
+                    <a asp-action="Update" asp-controller="Home" asp-route-id="@item.Id">Update</a>
+                    <a asp-action="Remove" asp-controller="Home" asp-route-id="@item.Id">Remove</a>
+                </td>
 
-        </tr>
+            </tr>
+        }
     }
+
 </table>
 </body>
 </html>

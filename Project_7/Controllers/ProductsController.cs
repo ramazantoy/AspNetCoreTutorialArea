@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,7 @@ namespace Project_7.Controllers
 
         
         //ok(200),NotFound(404),NoContent(204),Created(201),BadRequest(401)
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -49,6 +51,7 @@ namespace Project_7.Controllers
             return Ok(result);
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {

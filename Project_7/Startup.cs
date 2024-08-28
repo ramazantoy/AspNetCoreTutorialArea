@@ -42,6 +42,8 @@ namespace Project_7
                     ValidAudience = "http://localhost",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("afoolasfallen258")),
                     ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,// for delay
                 };
 
             });
@@ -80,6 +82,7 @@ namespace Project_7
             app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("Project_7Policy");
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
