@@ -24,6 +24,7 @@ namespace Project_8.CQRS
             services.AddScoped<GetStudentByIdQueryHandler>();
             services.AddScoped<GetStudentsQueryHandler>();
             services.AddScoped<CreateStudentCommandHandler>();
+            services.AddScoped<RemoveStudentCommandHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
