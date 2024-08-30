@@ -15,14 +15,14 @@ namespace Project_8.CQRS.CQRS.Handlers
 
         public GetStudentByIdQueryResult Handle(GetStudentByIdQuery getStudentByIdQuery)
         {
-          var result=  _context.Set<Student>().Find(getStudentByIdQuery.Id);
+            var result = _context.Set<Student>().Find(getStudentByIdQuery.Id);
 
-          return new GetStudentByIdQueryResult()
-          {
-              Age = result.Age,
-              Name = result.Name,
-              Surname = result.Surname
-          };
+            return new GetStudentByIdQueryResult
+            {
+                Age = result.Age,
+                Name = result.Name,
+                Surname = result.Surname
+            };
         }
     }
 }

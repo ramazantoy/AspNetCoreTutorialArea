@@ -18,8 +18,8 @@ namespace Project_8.CQRS.CQRS.Handlers
 
         public IEnumerable<GetStudentsQueryResult> Handle(GetStudentsQuery getStudentsQuery)
         {
-            return _context.Students.Select(x => new GetStudentsQueryResult { Name = x.Name, Surname = x.Surname }).AsNoTracking().AsEnumerable();
+            return _context.Students.Select(x => new GetStudentsQueryResult { Name = x.Name, Surname = x.Surname })
+                .AsNoTracking().AsEnumerable();
         }
-
     }
 }
