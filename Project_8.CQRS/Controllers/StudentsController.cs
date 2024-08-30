@@ -13,14 +13,16 @@ namespace Project_8.CQRS.Controllers
         private readonly GetStudentsQueryHandler _getStudentsQueryHandler;
         private readonly CreateStudentCommandHandler _createStudentCommandHandler;
         private readonly RemoveStudentCommandHandler _removeStudentCommandHandler;
+        private readonly UpdateStudentCommandHandler _updateStudentCommandHandler;
 
         public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler,
-            GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler)
+            GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
         {
             _getStudentByIdQueryHandler = getStudentByIdQueryHandler;
             _getStudentsQueryHandler = getStudentsQueryHandler;
             _createStudentCommandHandler = createStudentCommandHandler;
             _removeStudentCommandHandler = removeStudentCommandHandler;
+            _updateStudentCommandHandler = updateStudentCommandHandler;
         }
 
         [HttpGet("{id}")]
@@ -49,6 +51,13 @@ namespace Project_8.CQRS.Controllers
         public IActionResult Remove(int id)
         {
             _removeStudentCommandHandler.Handle(new RemoveStudentCommand(id));
+            return NoContent();
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateStudentCommand updateStudentCommand)
+        {
+            _updateStudentCommandHandler.Handle(updateStudentCommand);
             return NoContent();
         }
     }

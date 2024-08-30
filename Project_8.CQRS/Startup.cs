@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Project_8.CQRS.CQRS.Commands;
 using Project_8.CQRS.CQRS.Handlers;
 using Project_8.CQRS.Data;
 
@@ -25,6 +26,7 @@ namespace Project_8.CQRS
             services.AddScoped<GetStudentsQueryHandler>();
             services.AddScoped<CreateStudentCommandHandler>();
             services.AddScoped<RemoveStudentCommandHandler>();
+            services.AddScoped<UpdateStudentCommandHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
