@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Project_8.CQRS.CQRS.Commands;
 using Project_8.CQRS.CQRS.Handlers;
 using Project_8.CQRS.CQRS.Queries;
@@ -9,55 +11,68 @@ namespace Project_8.CQRS.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly GetStudentByIdQueryHandler _getStudentByIdQueryHandler;
-        private readonly GetStudentsQueryHandler _getStudentsQueryHandler;
-        private readonly CreateStudentCommandHandler _createStudentCommandHandler;
-        private readonly RemoveStudentCommandHandler _removeStudentCommandHandler;
-        private readonly UpdateStudentCommandHandler _updateStudentCommandHandler;
+        // private readonly GetStudentByIdQueryHandler _getStudentByIdQueryHandler;
+        // private readonly GetStudentsQueryHandler _getStudentsQueryHandler;
+        // private readonly CreateStudentCommandHandler _createStudentCommandHandler;
+        // private readonly RemoveStudentCommandHandler _removeStudentCommandHandler;
+        // private readonly UpdateStudentCommandHandler _updateStudentCommandHandler;
+        //
+        // public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler,
+        //     GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
+        // {
+        //     _getStudentByIdQueryHandler = getStudentByIdQueryHandler;
+        //     _getStudentsQueryHandler = getStudentsQueryHandler;
+        //     _createStudentCommandHandler = createStudentCommandHandler;
+        //     _removeStudentCommandHandler = removeStudentCommandHandler;
+        //     _updateStudentCommandHandler = updateStudentCommandHandler;
+        // }
 
-        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler,
-            GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
+        private readonly IMediator _mediator;
+
+        public StudentsController(IMediator mediator)
         {
-            _getStudentByIdQueryHandler = getStudentByIdQueryHandler;
-            _getStudentsQueryHandler = getStudentsQueryHandler;
-            _createStudentCommandHandler = createStudentCommandHandler;
-            _removeStudentCommandHandler = removeStudentCommandHandler;
-            _updateStudentCommandHandler = updateStudentCommandHandler;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        public async Task<IActionResult> GetStudent(int id)
         {
-            var result = _getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
+            // var result = _getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
+            var result = await _mediator.Send(new GetStudentByIdQuery(id));
             return Ok(result);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _getStudentsQueryHandler.Handle(new GetStudentsQuery());
+            // var result = _getStudentsQueryHandler.Handle(new GetStudentsQuery());
+            var result = await _mediator.Send(new GetStudentsQuery());
             return Ok(result);
-            
         }
 
         [HttpPost]
-        public IActionResult Create(CreateStudentCommand createStudentCommand)
+        public async Task<IActionResult> Create(CreateStudentCommand createStudentCommand)
         {
-            _createStudentCommandHandler.Handle(createStudentCommand);
-            return Created("",createStudentCommand.Name);
+            // _createStudentCommandHandler.Handle(createStudentCommand);
+
+            await _mediator.Send(createStudentCommand);
+            return Created("", createStudentCommand.Name);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
-            _removeStudentCommandHandler.Handle(new RemoveStudentCommand(id));
+            //  _removeStudentCommandHandler.Handle(new RemoveStudentCommand(id));
+            await _mediator.Send(new RemoveStudentCommand(id));
             return NoContent();
         }
 
         [HttpPut]
-        public IActionResult Update(UpdateStudentCommand updateStudentCommand)
+        public async Task<IActionResult> Update(UpdateStudentCommand updateStudentCommand)
         {
-            _updateStudentCommandHandler.Handle(updateStudentCommand);
+            // _updateStudentCommandHandler.Handle(updateStudentCommand);
+
+            await _mediator.Send(updateStudentCommand);
             return NoContent();
         }
     }

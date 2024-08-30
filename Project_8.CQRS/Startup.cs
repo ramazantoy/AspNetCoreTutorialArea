@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +23,12 @@ namespace Project_8.CQRS
                     "server=(localdb)\\mssqllocaldb; database=Project8Core; integrated security=true;");
             });
 
-            services.AddScoped<GetStudentByIdQueryHandler>();
-            services.AddScoped<GetStudentsQueryHandler>();
-            services.AddScoped<CreateStudentCommandHandler>();
-            services.AddScoped<RemoveStudentCommandHandler>();
-            services.AddScoped<UpdateStudentCommandHandler>();
+            services.AddMediatR(typeof(Startup));
+            // services.AddScoped<GetStudentByIdQueryHandler>();
+            // services.AddScoped<GetStudentsQueryHandler>();
+            // services.AddScoped<CreateStudentCommandHandler>();
+            // services.AddScoped<RemoveStudentCommandHandler>();
+            // services.AddScoped<UpdateStudentCommandHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {

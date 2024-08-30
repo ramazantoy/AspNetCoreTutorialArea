@@ -1,6 +1,8 @@
-﻿namespace Project_8.CQRS.CQRS.Commands
+﻿using MediatR;
+
+namespace Project_8.CQRS.CQRS.Commands
 {
-    public class CreateStudentCommand
+    public class CreateStudentCommand : IRequest
     {
         public string Name { get; set; }
         public string Surname { get; set; }

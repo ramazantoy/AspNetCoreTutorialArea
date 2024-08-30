@@ -1,6 +1,11 @@
-﻿namespace Project_8.CQRS.CQRS.Queries
+﻿using System.Collections;
+using System.Collections.Generic;
+using MediatR;
+using Project_8.CQRS.CQRS.Results;
+
+namespace Project_8.CQRS.CQRS.Queries
 {
-    public class GetStudentsQuery
+    public class GetStudentsQuery : IRequest<IEnumerable<GetStudentsQueryResult>>
     {
     }
 }
