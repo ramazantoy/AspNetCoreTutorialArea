@@ -8,10 +8,12 @@ namespace Project_8.CQRS.Controllers
     {
 
         private readonly GetStudentByIdQueryHandler _getStudentByIdQueryHandler;
+        private readonly GetStudentsQueryHandler _getStudentsQueryHandler;
 
-        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler)
+        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetStudentsQueryHandler getStudentsQueryHandler)
         {
             _getStudentByIdQueryHandler = getStudentByIdQueryHandler;
+            _getStudentsQueryHandler = getStudentsQueryHandler;
         }
 
         [HttpGet("{id}")]
@@ -19,6 +21,13 @@ namespace Project_8.CQRS.Controllers
         {
           var result=  _getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
           return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = _getStudentsQueryHandler.Handle(new GetStudentsQuery());
+            return Ok(result);
         }
     }
 }

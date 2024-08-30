@@ -22,7 +22,10 @@ namespace Project_8.CQRS
             {
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project8Core; integrated security=true;");
             });
+            
             services.AddScoped<GetStudentByIdQueryHandler>();
+            services.AddScoped<GetStudentsQueryHandler>();
+            
             services.AddControllers().AddNewtonsoftJson(opt=>
             {
                 opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
