@@ -8,5 +8,7 @@ namespace Project_8.CQRS.Data
         {
             
         }
+
+        public DbSet<Student> Students { get; set; }
     }
 }

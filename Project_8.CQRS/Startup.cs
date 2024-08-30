@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Project_8.CQRS.Data;
 
 namespace Project_8.CQRS
 {
@@ -16,6 +18,10 @@ namespace Project_8.CQRS
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<StudentContext>(opt =>
+            {
+                opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Project8Core; integrated security=true;");
+            });
             services.AddControllers().AddNewtonsoftJson(opt=>
             {
                 opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
