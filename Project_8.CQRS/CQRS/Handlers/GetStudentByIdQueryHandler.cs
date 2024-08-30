@@ -1,6 +1,8 @@
-﻿using Project_8.CQRS.Data;
+﻿using Project_8.CQRS.CQRS.Queries;
+using Project_8.CQRS.CQRS.Results;
+using Project_8.CQRS.Data;
 
-namespace Project_8.CQRS
+namespace Project_8.CQRS.CQRS.Handlers
 {
     public class GetStudentByIdQueryHandler
     {

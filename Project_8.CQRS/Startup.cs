@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Project_8.CQRS.CQRS.Handlers;
 using Project_8.CQRS.Data;
 
 namespace Project_8.CQRS

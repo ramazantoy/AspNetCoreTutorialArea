@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Project_8.CQRS.CQRS.Queries;
+using Project_8.CQRS.CQRS.Results;
 using Project_8.CQRS.Data;
 
-namespace Project_8.CQRS
+namespace Project_8.CQRS.CQRS.Handlers
 {
     public class GetStudentsQueryHandler
     {
