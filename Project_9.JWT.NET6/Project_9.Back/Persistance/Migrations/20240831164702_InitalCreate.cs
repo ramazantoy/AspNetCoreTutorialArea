@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Project_9.Back.Migrations
+namespace Project_9.Back.Persistance.Migrations
 {
     public partial class InitalCreate : Migration
     {

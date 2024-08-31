@@ -7,7 +7,7 @@ using Project_9.Back.Persistance.Context;
 
 #nullable disable
 
-namespace Project_9.Back.Migrations
+namespace Project_9.Back.Persistance.Migrations
 {
     [DbContext(typeof(Project9JwtContext))]
     partial class Project9JwtContextModelSnapshot : ModelSnapshot

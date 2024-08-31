@@ -8,10 +8,10 @@ using Project_9.Back.Persistance.Context;
 
 #nullable disable
 
-namespace Project_9.Back.Migrations
+namespace Project_9.Back.Persistance.Migrations
 {
     [DbContext(typeof(Project9JwtContext))]
-    [Migration("20240831163216_InitalCreate")]
+    [Migration("20240831164702_InitalCreate")]
     partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
