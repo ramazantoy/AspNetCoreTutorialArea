@@ -11,10 +11,11 @@ public class Project9JwtContext : DbContext
         
     }
 
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<AppUser> AppUsers { get; set; }
-    public DbSet<AppRole> AppRoles { get; set; }
+    public DbSet<Product> Products => Set<Product>();
+
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<AppUser> AppUsers => Set<AppUser>();
+    public DbSet<AppRole> AppRoles => Set<AppRole>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
