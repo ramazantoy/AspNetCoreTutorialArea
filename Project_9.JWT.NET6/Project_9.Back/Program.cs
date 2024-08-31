@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Project_9.Back.Core.Application.Interfaces;
 using Project_9.Back.Persistance.Context;
+using Project_9.Back.Persistance.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<Project9JwtContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
 });
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
