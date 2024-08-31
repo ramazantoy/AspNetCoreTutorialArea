@@ -90,6 +90,21 @@ This project focuses on implementing user authentication and authorization featu
 # Dummy Video
 https://github.com/ramazantoy/AspNetCoreTutorialArea/assets/37442787/76bd2e0a-9fee-498e-a9db-9c863562f88b
 
+## Project_6: N Tier Architecture, Auto Mapper, Fluent Validation
+
+This project is not finished.
+
+## Project_7: WEB API
+
+This project include dummy web api with jwt. Testing on swagger and  postman.
+
+# Topics Covered
+
+- How to create web api for asp net core.
+- CORS & SOP
+- How to use JWT in api.
+
+
 
 
 
