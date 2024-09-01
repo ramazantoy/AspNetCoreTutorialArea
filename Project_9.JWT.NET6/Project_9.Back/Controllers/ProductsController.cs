@@ -44,4 +44,11 @@ public class ProductsController : ControllerBase
       return Created("",request);
    }
 
+   [HttpPut]
+   public async Task<IActionResult> Update(UpdateProductCommandRequest request)
+   {
+      await _mediator.Send(request);
+      return NoContent();
+   }
+
 }
