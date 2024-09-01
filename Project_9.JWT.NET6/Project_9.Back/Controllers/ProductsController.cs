@@ -37,4 +37,11 @@ public class ProductsController : ControllerBase
       return NoContent();
    }
 
+   [HttpPost]
+   public async Task<IActionResult> Create(CreateProductCommandRequest request)
+   {
+      await _mediator.Send(request);
+      return Created("",request);
+   }
+
 }
