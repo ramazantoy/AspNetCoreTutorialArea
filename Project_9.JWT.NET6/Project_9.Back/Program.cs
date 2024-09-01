@@ -1,5 +1,9 @@
+using System.Reflection;
+using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Project_9.Back.Core.Application.Interfaces;
+using Project_9.Back.Core.Application.Mappings;
 using Project_9.Back.Persistance.Context;
 using Project_9.Back.Persistance.Repositories;
 
@@ -17,6 +21,19 @@ builder.Services.AddDbContext<Project9JwtContext>(opt =>
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
+
+builder.Services.AddAutoMapper(opt =>
+{
+opt.AddProfiles(new List<Profile>()
+{
+    new ProductProfile(),
+    
+});
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

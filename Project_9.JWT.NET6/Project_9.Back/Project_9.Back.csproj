@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +24,8 @@
 
   <ItemGroup>
     <Folder Include="Core\Application\" />
+    <Folder Include="Core\Application\Features\CQRS\Commands" />
+    <Folder Include="Infrastructure" />
     <Folder Include="Persistance\Context\" />
     <Folder Include="Persistance\Migrations\" />
     <Folder Include="Persistance\Repositories\" />
