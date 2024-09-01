@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Core\Application\" />
-    <Folder Include="Core\Application\Features\CQRS\Commands" />
     <Folder Include="Infrastructure" />
     <Folder Include="Persistance\Context\" />
     <Folder Include="Persistance\Migrations\" />

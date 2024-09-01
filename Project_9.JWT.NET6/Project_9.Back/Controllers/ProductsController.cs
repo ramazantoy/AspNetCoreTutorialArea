@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Project_9.Back.Core.Application.Features.CQRS.Commands;
 using Project_9.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Project_9.Back.Controllers;
@@ -27,7 +28,13 @@ public class ProductsController : ControllerBase
    {
       var result = await _mediator.Send(new GetProductQueryRequest(id));
       return result==null ? NotFound(id) : Ok(result);
-     
    }
-   
+
+   [HttpDelete("{id}")]
+   public async Task<IActionResult> Delete(int id)
+   { 
+      await _mediator.Send(new DeleteProductCommandRequest(id));
+      return NoContent();
+   }
+
 }
