@@ -53,7 +53,7 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         await _mediator.Send(new DeleteCategoryCommandRequest(id));
-        return NoContent();
+        return Ok();
     }
     
 }
