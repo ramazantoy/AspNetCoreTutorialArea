@@ -26,11 +26,11 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 builder.Services.AddAutoMapper(opt =>
 {
-opt.AddProfiles(new List<Profile>()
-{
-    new ProductProfile(),
-    
-});
+    opt.AddProfiles(new List<Profile>()
+    {
+        new ProductProfile(),
+        new CategoryProfile()
+    });
 });
 
 
