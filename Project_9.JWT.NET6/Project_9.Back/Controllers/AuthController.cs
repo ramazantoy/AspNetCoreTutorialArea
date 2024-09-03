@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using System.IdentityModel.Tokens.Jwt;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Project_9.Back.Core.Application.Features.CQRS.Commands;
+using Project_9.Back.Core.Application.Features.CQRS.Queries;
+using Project_9.Back.Infrastructure.Tools;
 
 namespace Project_9.Back.Controllers;
 
@@ -18,7 +21,19 @@ public class AuthController : ControllerBase
     [HttpPost("Register")]
     public async Task<IActionResult> Register(RegisterUserCommandRequest request)
     {
-       await _mediator.Send(request);
-       return Created("", request);
+        await _mediator.Send(request);
+        return Created("", request);
+    }
+
+    [HttpPost("[action]")]
+    public async Task<IActionResult> Login(CheckUserQueryRequest request)
+    {
+        var dto = await _mediator.Send(request);
+        if (dto.IsExist)
+        {
+            return Created("", JwtTokenGenerator.GenerateToken(dto));
+        }
+
+        return BadRequest("username or password is wrong");
     }
 }

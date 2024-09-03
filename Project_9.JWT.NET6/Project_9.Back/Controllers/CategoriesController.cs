@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project_9.Back.Core.Application.Dto;
 using Project_9.Back.Core.Application.Features.CQRS.Commands;
@@ -6,6 +7,7 @@ using Project_9.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Project_9.Back.Controllers;
 
+[Authorize(Roles = "Member,Admin")]
 [Route("api/[controller]")]
 [ApiController]
 public class CategoriesController : ControllerBase

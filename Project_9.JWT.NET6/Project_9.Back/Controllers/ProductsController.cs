@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project_9.Back.Core.Application.Features.CQRS.Commands;
 using Project_9.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Project_9.Back.Controllers;
 
+[Authorize(Roles = "Admin")]
 [Route("api/[controller]")]
 [ApiController]
 public class ProductsController : ControllerBase
