@@ -24,7 +24,7 @@ public class JwtTokenGenerator
             claims.Add(new Claim("UserName", checkUserResponseDto.Username));
         }
 
-        var expireDate = DateTime.UtcNow.AddMinutes(JwtTokenDefaults.Expire);
+        var expireDate = DateTime.UtcNow.AddDays(JwtTokenDefaults.Expire);
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key));
         var credentials = new SigningCredentials(key: securityKey, algorithm: SecurityAlgorithms.HmacSha256);
         var handler = new JwtSecurityTokenHandler();
