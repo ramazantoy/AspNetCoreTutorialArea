@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,5 +57,40 @@ public class CategoryController : Controller
         }
 
         return RedirectToAction("List");
+    }
+
+    public IActionResult Create()
+    {
+        return View(new CreateCategoryModel());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateCategoryModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+            if (token != null)
+            {
+                var jsonData = JsonSerializer.Serialize(model);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+     
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+              var response=await  client.PostAsync($"http://localhost:5135/api/Categories/", content);
+
+              if (response.IsSuccessStatusCode)
+              {
+                  return RedirectToAction("List");
+              }
+              else
+              {
+                  ModelState.AddModelError("","Fail.");
+              }
+            }
+        }
+      
+        return View(model);
+        
     }
 }
