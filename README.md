@@ -112,6 +112,9 @@ This project include CQRS design on api.
 ## Project_9: Jwt,CQRS,MVC
 
 This project include 2 project. Backend,and front project. Auth with jwt. 
+Sign-in, login, add, remove and list products and categories. With api.
+Front end using mvc design.
+
 
 
 
