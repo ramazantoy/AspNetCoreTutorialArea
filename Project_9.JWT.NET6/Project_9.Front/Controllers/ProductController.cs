@@ -11,9 +11,8 @@ namespace Project_9.Front.Controllers;
 [Authorize(Roles = "Admin,Member")]
 public class ProductController : Controller
 {
-    private IHttpClientFactory _httpClientFactory;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-    // GET
     public ProductController(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
@@ -63,7 +62,7 @@ public class ProductController : Controller
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                new AuthenticationHeaderValue("Bearer", token);
 
             var response = await client.GetAsync($"http://localhost:5135/api/categories");
 
@@ -84,7 +83,7 @@ public class ProductController : Controller
 
         return RedirectToAction("List");
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductModel model)
     {
@@ -114,10 +113,95 @@ public class ProductController : Controller
                 {
                     return RedirectToAction("List");
                 }
+
                 ModelState.AddModelError("", "fail");
             }
 
         }
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> Update(int id)
+    {
+        var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+        if (token != null)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responseCategory = await client.GetAsync($"http://localhost:5135/api/categories");
+
+
+            var responseProduct = await client.GetAsync($"http://localhost:5135/api/products/{id}");
+
+            if (responseProduct.IsSuccessStatusCode)
+            {
+                var jsonProduct = await responseProduct.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<UpdateProductModel>(jsonProduct, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+
+                if (responseCategory.IsSuccessStatusCode)
+                {
+                    var jsonCategoryData = await responseCategory.Content.ReadAsStringAsync();
+
+                    var data = JsonSerializer.Deserialize<List<CategoryListModel>>(jsonCategoryData,
+                        new JsonSerializerOptions
+                        {
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        });
+
+                    if (result != null)
+                    {
+                        result.Categories = new SelectList(data, "Id", "Definition");
+                    }
+
+                    return View(result);
+                }
+            }
+        }
+
+        return RedirectToAction("List");
+
+    }
+    [HttpPost]
+    public async Task<IActionResult> Update(UpdateProductModel model)
+    {
+        var data = TempData["Categories"]?.ToString();
+        if (data != null)
+        {
+            var categories = JsonSerializer.Deserialize<List<SelectListItem>>(data);
+            model.Categories = new SelectList(categories, "Value", "Text",model.CategoryId);
+        }
+
+
+        if (ModelState.IsValid)
+        {
+
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+            if (token != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var jsonData = JsonSerializer.Serialize(model);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync("http://localhost:5135/api/products/", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("List");
+                }
+
+                ModelState.AddModelError("", $"{response.StatusCode}");
+            }
+
+        }
+
         return View(model);
     }
 }
