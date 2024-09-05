@@ -39,4 +39,17 @@ public class ProductController : Controller
 
         return View();
     }
+
+    public async Task<IActionResult> Remove(int id)
+    {
+        var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+        if (token != null)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await client.DeleteAsync($"http://localhost:5135/api/Products/{id}");
+        }
+
+        return RedirectToAction("List");
+    }
 }
