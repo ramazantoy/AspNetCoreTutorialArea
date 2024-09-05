@@ -27,6 +27,7 @@
                         @categoryListModel.Definition
                     </td>
                     <td>
+                        <a asp-action="Update" asp-controller="Category" asp-route-id="@categoryListModel.Id" class="btn btn-warning btn-sm">Update</a>
                         <a asp-action="Remove" asp-controller="Category" asp-route-id="@categoryListModel.Id" class="btn btn-danger btn-sm">Remove</a>
                     </td>
                 </tr>

@@ -74,23 +74,75 @@ public class CategoryController : Controller
             {
                 var jsonData = JsonSerializer.Serialize(model);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-     
+
                 var client = _httpClientFactory.CreateClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-              var response=await  client.PostAsync($"http://localhost:5135/api/Categories/", content);
+                var response = await client.PostAsync($"http://localhost:5135/api/Categories/", content);
 
-              if (response.IsSuccessStatusCode)
-              {
-                  return RedirectToAction("List");
-              }
-              else
-              {
-                  ModelState.AddModelError("","Fail.");
-              }
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Fail.");
+                }
             }
         }
-      
+
         return View(model);
-        
+    }
+
+    public async Task<IActionResult> Update(int id)
+    {
+        var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+        if (token != null)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await client.GetAsync($"http://localhost:5135/api/Categories/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<CategoryListModel>(jsonData,
+                    new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+                return View(result);
+            }
+        }
+
+        return RedirectToAction("List");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Update(CategoryListModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accessToken")?.Value;
+            if (token != null)
+            {
+                var jsonData = JsonSerializer.Serialize(model);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await client.PutAsync($"http://localhost:5135/api/Categories/", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Fail.");
+                }
+            }
+        }
+
+        return View(model);
     }
 }
