@@ -105,6 +105,17 @@ This project include dummy web api with jwt. Testing on swagger and  postman.
 - How to use JWT in api.
 
 
+## Project_8: CQRS
+
+This project include CQRS design on api.
+
+## Project_9: Jwt,CQRS,MVC
+
+This project include 2 project. Backend,and front project. Auth with jwt. 
+
+
+
+
 
 
 
